@@ -1,0 +1,189 @@
+@import './appearance-richtext.scss';
+
+$states_bgc_active: #732FB3;
+$states_bgc: #c093eb;
+$devices_bgc_active: #6FB456;
+$devices_bgc: #c5e4ba;
+$parent_states_bgc_active: #2c6aee;
+$parent_states_bgc: #8fadec;
+
+// APPEARANCE PANEL
+.dragblock-inspector-controls.appearance {
+    .properties {
+        margin-top: 20px;
+        a {
+            cursor: pointer;
+            font-size: 0.96em;
+            font-family: monospace;
+            line-height: 1.7em;
+            display: inline-block;
+            transition-property: transform;
+            transition-duration: 100;
+            transition-delay: 0;
+            letter-spacing: -0.3px;
+            &:hover {
+                // text-decoration: underline;                                    
+                transform: scale(1.1);
+                // margin-left: 10px;
+                > code {
+                    color: red;
+                }
+            }
+            &.disabled {
+                opacity: .5;
+            }
+            strong {
+                color: white;
+                font-size: 0.7em;
+                padding: 0px 3px;
+                margin: 0 1px 0 0;
+                position: relative;
+                top: -1px;                    
+                &.devices {
+                    background-color: $devices_bgc_active;
+                }                    
+                &.selectors, &.parent-selectors {
+                    border: 1px solid black;
+                    border-radius: 4px;
+                    top: -1px;
+                    color: black;
+                }
+                &.states {
+                    background-color: $states_bgc_active;
+                }
+                &.parent-states {
+                    background-color: $parent_states_bgc_active;
+                }
+                
+            }
+            > code {
+                background: none;
+                padding: 0;
+                font-size: inherit;
+                color: #C80000;
+                margin-right: 5px;
+            }
+            > span {
+                color: black;  
+            }
+            .value-preview {                    
+                .color {
+                    border: 1px solid;
+                    margin: 0 4px 0 0;
+                    display: inline-block;
+                    height: 0.8em;
+                    width: 0.8em;
+                    top: 0.07em;
+                    position: relative;
+                }                    
+            }
+        }
+    }
+}
+
+// APPEARANCE CONTROLS / PROPERTY POPOVER
+.dragblock-appearance-control-popover {
+    .components-popover__content {                
+        .value {
+            margin-bottom: 20px;
+            .dragblock-dimension-control {
+                margin-bottom: 15px;
+            }
+        }
+        .extra {
+            margin: 0 0 10px 0;
+			justify-content: stretch;
+			align-items: center;
+			
+            .label {
+				width: 55px;                
+                text-transform: uppercase;
+                font-size: 0.65em;
+                font-weight: bold;
+                opacity: .8; 
+				width: 18%;
+            }
+
+            .control {
+                width: 82%;
+            }
+                        
+            a.extra-item {
+                display: inline-block;
+                cursor: pointer;
+                border: 1px solid #ddd;
+                padding: 0px 2.5px;
+                background: #f0f0f0;
+                font-size: 0.66em;
+                line-height: 1.76em;
+                color: #666;
+                text-align: center;
+                letter-spacing: 0.5px;
+                
+                position: relative;
+                &:hover {
+                    border-color: #ccc;
+                    background-color: #dec6f3;
+                    color: black;            
+                }
+                &.active {
+                    background: $states_bgc;
+                    color: white;
+                    svg {
+                        fill: white
+                    }
+                }
+                svg {
+                    display: inline;
+                    width: 1.2em;
+                    vertical-align: text-bottom;
+                    fill: currentColor
+                }
+            }            
+            &.devices {				
+                a.extra-item {            
+                    font-size: 1.1em;
+                    &:hover {
+                        background: $devices_bgc;
+
+                    }
+                    &.active {
+                        background: $devices_bgc_active;
+                    }
+                }
+            }
+            &.selectors {
+                a.state-item {
+                    &:hover {
+                        background: $states_bgc;
+                        color: white;
+                    }
+                    &.active {
+                        background: $states_bgc_active;
+                    }
+                }
+                .components-base-control__field {
+                    margin: 0;
+                    .components-text-control__input {
+                        min-height: 0;
+                        padding: 2px;                        
+                    }
+                }
+                
+            }
+            &.parent-selectors {
+                a.state-item {
+                    &:hover {
+                        background: $parent_states_bgc;
+                        color: white;
+                    }
+                    &.active {
+                        background: $parent_states_bgc_active;
+                    }
+                }
+            }
+            
+        }
+    }
+    
+}

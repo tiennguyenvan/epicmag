@@ -1,0 +1,7 @@
+{
+	"name": "dragblock/dragblock-applications-front",
+	"title": "DragBlock Applications for Front (Also in Editor iframe Elements)",
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css",
+	"style": "file:./style-index.css"
+}

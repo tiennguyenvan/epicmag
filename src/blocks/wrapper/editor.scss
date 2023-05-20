@@ -1,0 +1,340 @@
+/**
+ * The following styles get applied inside the editor only.
+ *
+ * Replace them with your own styles or remove the file completely.
+ */
+@import '../../applications/back/editor-iframe.scss';
+
+.wp-block-dragblock-wrapper {	
+	
+	////////////////////////////////////////////////////////////////
+	/// Appender
+	////////////////////////////////////////////////////////////////
+	&.is-selected {		
+		&>.block-list-appender {
+			// display: flex;
+			width: 30px;
+			height: 30px;
+			justify-content: center;
+			align-items: center;
+
+			.block-editor-inserter {
+				display: inherit;
+				justify-content: inherit;
+				align-items: inherit;
+				width: 100%;
+				height: 100%;
+
+				.components-button {
+					display: inherit;
+					justify-content: inherit;
+					align-items: inherit;
+					padding: 0;
+					margin: 0;
+					height: auto;
+					background-color: black;
+					color: white;
+
+					&:hover {
+						background-color: #007cba;
+					}
+
+					svg {
+						height: 28px;
+						fill: currentColor;
+					}
+				}
+			}
+		}
+			
+	}
+
+	// when there is no inner component
+	&[data-content-length="0"] {
+		height: 60px;
+		min-width: 30px;
+		position: relative;
+		border: 1px dashed #999;
+		// this is to make sure the appender will show at the bottom right of the box
+		display: flex;
+		align-items: flex-end;
+		justify-content: right;
+		&>.block-list-appender {
+			p.block-editor-default-block-appender__content {
+				display: none;
+			}
+		}
+	}
+}
+
+
+
+.dragblock-toolbar-popover-grid-content {
+	.section {
+
+		label {
+			font-size: 10px;
+			text-transform: uppercase;
+			letter-spacing: 0.5px;
+			font-weight: bold;
+			margin-top: 15px;
+			display: block;
+		}
+
+		&.d {
+			label {
+				margin-top: 0;
+			}
+		}
+
+		.options {
+			display: flex;
+			border: 1px solid #0003;
+			border-radius: 4px;
+
+			a {
+				cursor: pointer;
+				display: flex;
+				align-items: center;
+				align-content: center;
+				justify-content: center;				
+				padding: 5px;
+				border-radius: 4px;
+				color: black;
+
+				&:hover {
+					background: #b5e2ff;
+					color: #0693e3
+				}
+
+				&.active {
+					background: black;
+					color: white;
+				}
+
+				span {
+					display: block;
+				}
+
+				&.number {
+					span {
+						display: block;
+						width: 2em;
+						text-align: center;
+					}
+				}
+
+			}
+
+			.left {
+				display: grid;
+				grid-template-columns: 1fr;
+				row-gap: 5px;				
+				align-items: normal;
+				padding: 5px;
+				border-right: 1px solid #0003;
+				a {
+					display: flex;								
+					justify-content: center;
+					align-content: center;
+					background-color: #0001;
+					&.active {
+						background: #000C;
+					}						
+				}
+			}
+
+			.right {				
+				display: grid;
+				grid-template-columns: 1fr;
+				row-gap: 5px;				
+				align-items: normal;
+				padding: 5px;
+
+				.line {					
+					display: grid;
+					grid-template-columns: repeat(6,1fr);
+					column-gap: 5px;
+				}
+			}
+		}
+	}
+
+	&.grid-item-area {
+		display: grid;
+		grid-auto-flow: column;
+
+		.section {
+			margin-left: 15px;
+
+			&.d {
+				margin-left: 0;
+			}
+
+			label {
+				margin: 0;
+			}
+
+			.right {
+				width: 100%;
+				justify-content: center;
+				display: grid;
+
+				a {
+					&.cell {
+						opacity: 0.8;
+						border: 1px solid #0004;
+						background: #0002;
+						margin: 0;
+						border-radius: 0;
+						width: 10px;
+						height: 10px;
+					}
+
+					&:hover {
+						opacity: 1;
+						background: #b5e2ff;
+					}
+
+					&.active {
+						background: #0693e3;
+						border-color: #8ed1fc;
+
+					}
+				}
+			}
+		}
+	}
+
+	&.grid-layout {
+		$itemNormalBorder: #0002;
+		$itemActiveBorder: #0006;
+		$itemHoverBorder: #0009;
+		$itemSelectedBorder: #000F;
+
+		$itemNormalColor: #0006;
+		$itemActiveColor: #0009;
+		$itemHoverColor: #000A;
+		$itemSelectedColor: #000F;
+
+		$itemNormalBg: transparent;
+		$itemActiveBg: #309fe97F;
+		$itemHoverBg: #309fe98F;
+		$itemSelectedBg: #309fe9AF;
+
+		.items {
+			a {
+				display: inline-block;
+				font-weight: bold;
+				font-size: 10px;
+				line-height: 1em;
+				padding: 3px;
+				border-radius: 4px;
+				margin-right: 5px;
+				margin-bottom: 5px;
+				border: 1px solid $itemNormalBorder;
+				color: $itemNormalColor;
+				background-color: $itemNormalBg;
+
+				&:hover {
+					border-color: $itemHoverBorder;
+					color: $itemHoverColor;
+					background-color: $itemHoverBg;
+				}
+
+				&.selected {
+					border-color: $itemSelectedBorder;
+					color: $itemSelectedColor;
+					background-color: $itemSelectedBg;
+				}
+			}
+		}
+
+		.sections {
+			display: grid;
+			grid-auto-flow: column;
+
+			.section {
+				margin-left: 15px;
+
+				&.d {
+					margin-left: 0
+				}
+
+				label {
+					margin: 0;
+				}
+
+				.left {
+					a {
+							
+					}
+				}
+
+				.right {
+					.blocks {
+						display: grid;
+						grid-template-rows: repeat(6, 20px);
+						grid-column: 1/-1;
+						grid-row: 1/-1;
+						gap: 2px;
+
+						a {
+							border-radius: 0;
+							margin: 0;
+							text-align: center;
+							font-size: 13px;
+							font-weight: bold;
+							justify-content: center;
+							align-content: center;
+							display: flex;
+							border: 1px solid transparent;
+							color: transparent;
+							background-color: $itemNormalBg;
+
+							&:hover {
+								border-color: $itemHoverBorder;
+								color: $itemHoverColor;
+								background-color: $itemHoverBg;
+							}
+
+							&.active {
+								border-color: $itemActiveBorder;
+								color: $itemActiveColor;
+								background-color: $itemActiveBg;
+
+								&.selected {
+									border-color: $itemSelectedBorder;
+									color: $itemSelectedColor;
+									background-color: $itemSelectedBg;
+								}
+							}
+						}
+					}
+
+					.mask {
+						display: grid;
+						grid-column: 1/-1;
+						grid-row: 1/-1;
+						gap: 2px;
+
+						a {
+							opacity: 0.8;
+							border: 1px solid $itemNormalBorder;
+							background: transparent;
+							margin: 0;
+							border-radius: 0;
+							width: 20px;
+							height: 20px;
+
+							&:hover {
+								background-color: $itemActiveBg;
+							}
+						}
+					}
+
+				}
+			}
+		}
+	}
+}

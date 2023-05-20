@@ -1,0 +1,42 @@
+.dragblock-inspector-controls.content {
+    .properties {
+        margin-top: 10px;
+
+        a {
+
+            cursor: pointer;
+            font-size: 0.9em;
+            color: #000000;
+            display: inline-block;
+            transition: transform 0.1s;
+
+            &:hover {
+                transform: scale(1.1);
+            }
+
+            &.disabled {
+                opacity: 0.5;
+            }
+
+            code {
+                padding: 0;
+                background: none;
+                color: #960096;
+                &.active {
+                    font-weight: bold;
+                }
+            }
+        }
+
+    }
+}
+
+
+
+.dragblock-content-control-popover {
+
+    .components-popover__content {
+
+        overflow: visible !important;
+    }
+}

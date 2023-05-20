@@ -1,0 +1,26 @@
+@import '../../applications/back/editor-iframe.scss';
+
+input.wp-block-dragblock-input {
+
+    &[type=date],
+    &[type=datetime-local],
+    &[type=datetime],
+    &[type=email],
+    &[type=month],
+    &[type=number],
+    &[type=password],
+    &[type=search],
+    &[type=tel],
+    &[type=text],
+    &[type=time],
+    &[type=url],
+    &[type=week] {
+        padding: initial;
+        line-height: initial;
+        min-height: initial;
+        box-shadow: initial;
+        border-radius: initial;        
+        color:initial;
+    }
+
+}

@@ -1,0 +1,59 @@
+
+
+
+
+Get inspired
+- https://editor.construct.net/
+- https://teleporthq.io
+- https://scratch.mit.edu/
+- https://bubble.io/
+- https://blockly-demo.appspot.com/static/demos/code/index.html
+
+
+Popular General Interactive Elements
+- Navigation menu: Creating a responsive navigation menu that adapts to different screen sizes, and allows for smooth scrolling to different sections of the page.
+- Slider/Carousel: Implementing a slideshow or carousel of images or content that can be controlled manually or automatically.
+- Form validation: Adding client-side validation to ensure that user inputs on forms are valid before submission.
+- Modal/Popup: Creating a popup or modal window that displays additional information or requires user input.
+- Accordion: Creating a collapsible accordion that allows users to toggle between different sections of content.
+- Tabbed interface: Creating a tabbed interface that displays different content or options based on user selection.
+- Scrolling animations: Implementing scrolling animations to add visual interest and interactivity to the page.
+- Tooltips: Adding tooltips that display additional information when users hover over certain elements.
+- Dropdown menu: Creating a dropdown menu that displays additional options or sub-menus when users click on it.
+- Interactive charts/graphs: Implementing interactive charts or graphs that display data and allow users to interact with them.
+- Create a toggle switch to display/hide certain elements on the page.
+- Implement a lightbox to showcase larger images or videos.
+- Add a filter or search bar to allow users to easily find content.
+- Create a scrolling timeline to display events or milestones.
+- Implement an accordion to showcase frequently asked questions or related content.
+- Add a call-to-action button to encourage users to take a specific action.
+- Implement a countdown timer to build anticipation for an event or product launch.
+- Add an image zoom feature to showcase product details.
+- Implement a rating or review system for products or services.
+- Add a progress bar to show how far users have progressed in a multi-step process.
+- Implement a parallax effect to create an engaging visual experience.
+- Add a social media sharing button to encourage users to share the content on social media platforms.
+
+Generate JS Actions:
+- Add or remove a class name from an element.
+- Toggle a class name on an element.
+- Get or set the text or HTML content of an element.
+- Get or set the value of an input field or form element.
+- Get or set the attributes of an element.
+- Show or hide an element.
+- Fade an element in or out.
+- Slide an element up or down.
+- Animate an element's properties, such as position, size, or color.
+- Add or remove event listeners on an element.
+- Prevent default behavior for a specific event.
+- Stop the propagation of an event to parent elements.
+- Create and manipulate arrays and objects.
+- Make AJAX requests to external APIs or servers.
+- Set or get cookies or local storage data.
+- Navigate to a different URL or anchor on the page.
+- Get or set the dimensions or position of an element.
+- Get or set the scroll position of the page or element.
+- Create, append, or remove elements from the DOM.
+- Execute JavaScript code dynamically.
+
+

@@ -1,0 +1,192 @@
+{
+	"version": 2,
+	"$schema": "https://schemas.wp.org/wp/6.2/theme.json",
+	"customTemplates": [],
+	"patterns": [],
+	"settings": {
+		"_disabledAppearanceTools": true,
+		"layout": {
+			"contentSize": "1000px",
+			"wideSize": "1200px"
+		},
+		"color": {
+			"_disabledDefaultPalette": false,
+			"palette": [				
+				{
+					"name": "Primary",
+					"slug": "primary",
+					"color": "#976CEC"
+				},
+				{
+					"name": "Primary Focus",
+					"slug": "primary-focus",
+					"color": "#895EE0"
+				},
+				{
+					"name": "Primary Contrast",
+					"slug": "primary-contrast",
+					"color": "#F2EDFB"
+				},
+				{
+					"name": "Site Text",
+					"slug": "site-text",
+					"color": "#2D2D2D"
+				},
+				{
+					"name": "Site Background",
+					"slug": "site-background",
+					"color": "#FAFAFA"
+				},
+				{
+					"name": "Heading Text",
+					"slug": "heading-text",
+					"color": "#000000"
+				},
+				{
+					"name": "Secondary",
+					"slug": "secondary",
+					"color": "#E18CC9"
+				},
+				{
+					"name": "Secondary Focus",
+					"slug": "secondary-focus",
+					"color": "#ED73CB"
+				},
+				{
+					"name": "Secondary Contrast",
+					"slug": "secondary-contrast",
+					"color": "#FAEFF8"
+				},
+				{
+					"name": "Accent",
+					"slug": "accent",
+					"color": "#7FE5CA"
+				},
+				{
+					"name": "Accent Focus",
+					"slug": "accent-focus",
+					"color": "#1dd1a1"
+				},
+				{
+					"name": "Accent Contrast",
+					"slug": "accent-contrast",
+					"color": "#EEFDFD"
+				},
+				{
+					"name": "Success",
+					"slug": "success",
+					"color": "#8CBF6B"
+				},
+				{
+					"name": "Success Focus",
+					"slug": "success-focus",
+					"color": "#72AA4A"
+				},
+				{
+					"name": "Success",
+					"slug": "success-contrast",
+					"color": "#EFFDE4"
+				},
+
+				{
+					"name": "Danger",
+					"slug": "danger",
+					"color": "#EA5555"
+				},
+				{
+					"name": "Danger Focus",
+					"slug": "danger-focus",
+					"color": "#CC3C3C"
+				},
+				{
+					"name": "Danger Contrast",
+					"slug": "danger-contrast",
+					"color": "#FEF0F0"
+				},
+
+				{
+					"name": "Info",
+					"slug": "info",
+					"color": "#42A1FF"
+				},
+				{
+					"name": "Info Focus",
+					"slug": "info-focus",
+					"color": "#0984E3"
+				},
+				{
+					"name": "Info Contrast",
+					"slug": "info-contrast",
+					"color": "#E9F2FE"
+				},
+
+				{
+					"name": "Warning",
+					"slug": "warning",
+					"color": "#F2C23D"
+				},
+				{
+					"name": "Warning Focus",
+					"slug": "warning-focus",
+					"color": "#ECB51C"
+				},
+				{
+					"name": "Warning Contrast",
+					"slug": "warning-contrast",
+					"color": "#F9F5E6"
+				}
+			]
+		},
+		"blocks": {
+			"core/site-title": {
+				"typography": {
+					"fontFamilies": []
+				}
+			}
+		}
+	},
+	"styles": {
+		
+		"typography": {
+			"fontFamily": ""
+		},
+		"color": {
+			"text": "var(--wp--preset--color--site-text)",
+			"background": "var(--wp--preset--color--site-background)"
+		},
+		"elements": {
+			"link": {
+				"typography": {
+					"textDecoration": "none"
+				},
+				"color": {
+					"text": "var(--wp--preset--color--primary)"
+				},
+				":hover": {
+					"color": {
+						"text": "var(--wp--preset--color--primary-focus)"
+					}
+				}
+			},
+			"button": {
+				"typography": {
+					"textDecoration": "none"
+				},
+				"color": {
+					"text": "var(--wp--preset--color--primary-contrast)",
+					"background": "var(--wp--preset--color--primary)"
+				},
+				":hover": {
+					"color": {
+						"background": "var(--wp--preset--color--primary-focus)"
+					}
+				}
+			},
+			"heading": {
+				"color": {
+					"text": "var(--wp--preset--color--heading-text)"
+				}
+			}
+		}
+	}
+}

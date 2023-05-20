@@ -1,0 +1,112 @@
+$keywordColor: #2047c9;
+$keywordColorHover: #194efc;
+$mainWordColor: #000000;
+$normalColor: #333;
+
+// APPEARANCE PANEL
+.dragblock-inspector-controls.database {
+    .properties.queries {
+        margin-top: 20px;
+        font-family: monospace;
+
+        .query {
+            color: #666;
+
+
+
+            .keyword {
+                color: $keywordColor;
+                font-weight: bold;
+            }
+
+
+
+            a.title {
+                color: $mainWordColor;                
+                font-weight: bold;
+                &:hover {
+                    text-decoration: underline;                    
+
+                    .keyword {
+                        color: $keywordColorHover;
+                    }
+                }
+            }
+
+            .query-params {
+
+                padding-left: 10px;
+                border-left: 1px solid #ddd;
+
+                a.param {
+                    display: block;
+                    font-size: 0.95em;
+                    opacity: 0.9;
+                    color: $normalColor;
+                    transition-property: transform;
+                    transition-duration: 100ms;
+                    transition-delay: 0ms;
+
+                    &:hover {
+                        opacity: 1;
+
+                        // text-decoration: underline;
+                        transform: scale(1.05);
+
+                        .keyword {
+                            color: $keywordColorHover;
+                        }
+                    }
+
+                    .slug {}
+
+                    .value {
+                        &.array {
+                            display: block;
+                            padding-left: 10px;
+                            border-left: 1px solid #ddd;
+
+                            .object {
+                                font-size: 0.95em;
+                                display: block;
+
+                            }
+                        }
+                    }
+                }
+
+                .dragblock-autocomplete-search-box {
+                    button.fake-search-button {
+                        font-size: 0.95em;
+                        padding: 0;
+                        height: auto;
+                        border: none;
+                        box-shadow: none !important;
+                        opacity: 0.9;
+                        color: $keywordColor;
+                        transition-property: transform;
+                        transition-duration: 100ms;
+                        transition-delay: 0ms;
+                        font-weight: bold;
+                        &:hover {
+                            opacity: 1;
+                            text-decoration: underline;
+                            transform: scale(1.05);
+
+                        }
+                    }
+                }
+            }
+        }
+
+
+    }
+}
+
+
+// APPEARANCE CONTROLS / PROPERTY POPOVER
+$fieldHeight: 20px;
+
+.dragblock-database-control-popover {
+    .components-popover__content {}
+}

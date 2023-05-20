@@ -1,0 +1,24 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 2,
+	"name": "dragblock/icon",
+	"icon": "sparkles",
+	"title": "Icon (DragBlock)",	
+	"category": "dragblock-basic",		
+	"description": "Insert an SVG icon or graphic.",
+	"keywords": [ "icon", "svg" ],
+	"attributes": {
+		"icon": {
+			"type": "string",			
+			"default": ""
+		},
+		"iconName": {
+			"type": "string"
+		}
+	},
+	
+	"textdomain": "dragblock",
+	"editorScript": "file:./index.js",
+	"editorStyle": "file:./index.css",
+	"style": "file:./style-index.css"
+}

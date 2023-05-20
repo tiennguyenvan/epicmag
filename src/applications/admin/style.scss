@@ -1,0 +1,50 @@
+/*
+================================================================
+ADMIN
+================================================================
+*/
+.post-type-dragBlockblocksformmsg {
+	.page-title-action {
+		display: none;
+	}
+	.wp-list-table {
+
+		.column-referrer,
+		.column-email,
+		.column-date {
+			width: 10%;
+		}
+
+		.column-title {
+			width: 20%;
+		}
+
+		.column-content {
+			width: 50%;
+		}
+
+		.dragblock-form-emailed-successful {
+			background-color: rgb(61, 170, 33);
+
+		}
+
+		.dragblock-form-emailed-failed {
+			background-color: rgb(170, 33, 33);
+		}
+		.dragblock-form-emailed-local {
+			background-color: rgb(105, 101, 101);
+		}
+		.dragblock-form-emailed-local,
+		.dragblock-form-emailed-successful,
+		.dragblock-form-emailed-failed {
+			color: white;
+			display: inline-block;
+			border-radius: 4px;
+			padding: 0px 4px;
+			margin: auto;
+			font-size: 10px;
+			font-weight: bold;
+			letter-spacing: 1px;
+		}
+	}
+}
