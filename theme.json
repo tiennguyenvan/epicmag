@@ -1,0 +1,186 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/theme.json",
+	"version": 2,
+	"customTemplates": [
+		{
+			"name": "blank",
+			"postTypes": [
+				"page",
+				"post"
+			],
+			"title": "Blank"
+		},
+		{
+			"name": "blog-alternative",
+			"postTypes": [
+				"page"
+			],
+			"title": "Blog (Alternative)"
+		},
+		{
+			"name": "404",
+			"postTypes": [
+				"page"
+			],
+			"title": "404"
+		}
+	],
+	"settings": {
+		"appearanceTools": true,
+		"layout": {
+			"contentSize": "1420px",
+			"wideSize": "1920px"
+		},
+		"color": {
+			"defaultPalette": false,
+			"palette": [				
+				{
+					"name": "Primary",
+					"slug": "primary",
+					"color": "#976CEC"
+				},
+				{
+					"name": "Primary Focus",
+					"slug": "primary-focus",
+					"color": "#895EE0"
+				},
+				{
+					"name": "Primary Contrast",
+					"slug": "primary-contrast",
+					"color": "#F2EDFB"
+				},
+				{
+					"name": "Site Text",
+					"slug": "site-text",
+					"color": "#2D2D2D"
+				},
+				{
+					"name": "Site Background",
+					"slug": "site-background",
+					"color": "#FAFAFA"
+				},
+				{
+					"name": "Heading Text",
+					"slug": "heading-text",
+					"color": "#000000"
+				},
+				{
+					"name": "Secondary",
+					"slug": "secondary",
+					"color": "#E18CC9"
+				},
+				{
+					"name": "Secondary Focus",
+					"slug": "secondary-focus",
+					"color": "#ED73CB"
+				},
+				{
+					"name": "Secondary Contrast",
+					"slug": "secondary-contrast",
+					"color": "#FAEFF8"
+				},
+				{
+					"name": "Accent",
+					"slug": "accent",
+					"color": "#7FE5CA"
+				},
+				{
+					"name": "Accent Focus",
+					"slug": "accent-focus",
+					"color": "#1dd1a1"
+				},
+				{
+					"name": "Accent Contrast",
+					"slug": "accent-contrast",
+					"color": "#EEFDFD"
+				},
+				{
+					"name": "Success",
+					"slug": "success",
+					"color": "#8CBF6B"
+				},
+				{
+					"name": "Success Focus",
+					"slug": "success-focus",
+					"color": "#72AA4A"
+				},
+				{
+					"name": "Success",
+					"slug": "success-contrast",
+					"color": "#EFFDE4"
+				},
+
+				{
+					"name": "Danger",
+					"slug": "danger",
+					"color": "#EA5555"
+				},
+				{
+					"name": "Danger Focus",
+					"slug": "danger-focus",
+					"color": "#CC3C3C"
+				},
+				{
+					"name": "Danger Contrast",
+					"slug": "danger-contrast",
+					"color": "#FEF0F0"
+				},
+
+				{
+					"name": "Info",
+					"slug": "info",
+					"color": "#42A1FF"
+				},
+				{
+					"name": "Info Focus",
+					"slug": "info-focus",
+					"color": "#0984E3"
+				},
+				{
+					"name": "Info Contrast",
+					"slug": "info-contrast",
+					"color": "#E9F2FE"
+				},
+
+				{
+					"name": "Warning",
+					"slug": "warning",
+					"color": "#F2C23D"
+				},
+				{
+					"name": "Warning Focus",
+					"slug": "warning-focus",
+					"color": "#ECB51C"
+				},
+				{
+					"name": "Warning Contrast",
+					"slug": "warning-contrast",
+					"color": "#F9F5E6"
+				}
+			]
+		}
+	},
+	
+	"templateParts": [
+		{
+			"area": "header",
+			"name": "header",
+			"title": "Header"
+		},
+		{
+			"area": "footer",
+			"name": "footer",
+			"title": "Footer"
+		},
+		{
+			"area": "uncategorized",
+			"name": "comments",
+			"title": "Comments"
+		},
+		{
+			"area": "uncategorized",
+			"name": "post-meta",
+			"title": "Post Meta"
+		}
+	]
+}
