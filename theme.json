@@ -27,8 +27,8 @@
 	],
 	"settings": {		
 		"layout": {
-			"contentSize": "1420px",
-			"wideSize": "1920px"
+			"contentSize": "1000px",
+			"wideSize": "1420px"
 		},
 		"color": {
 			"defaultPalette": false,
