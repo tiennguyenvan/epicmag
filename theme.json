@@ -325,12 +325,7 @@
 			}			
 		}
 	},
-	"templateParts": [
-		{
-			"area": "header",
-			"name": "header-default",
-			"title": "Header Default"
-		},
+	"templateParts": [		
 		{
 			"area": "header",
 			"name": "header",
@@ -345,11 +340,6 @@
 			"area": "uncategorized",
 			"name": "comments",
 			"title": "Comments"
-		},
-		{
-			"area": "uncategorized",
-			"name": "post-meta",
-			"title": "Post Meta"
 		}
 	]
 }

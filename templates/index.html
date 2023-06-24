@@ -1,27 +1,45 @@
-<!-- wp:template-part {"slug":"header","tagName":"header"} /-->
+<!-- wp:template-part {"slug":"header","theme":"epicmag","tagName":"header","dragBlockClientId":"38b6f6d1-a9e0-4c0c-856b-9a793d14abb6"} /-->
 
-<!-- wp:group {"tagName":"main","layout":{"type":"constrained"}} -->
-<main class="wp-block-group">
-	<!-- wp:query {"query":{"perPage":10,"pages":0,"offset":0,"postType":"post","order":"desc","orderBy":"date","author":"","search":"","exclude":[],"sticky":"","inherit":true,"taxQuery":null,"parents":[]},"displayLayout":{"type":"flex","columns":3},"align":"wide","layout":{"type":"default"}} -->
-	<div class="wp-block-query alignwide">
-		<!-- wp:post-template {"align":"wide"} -->
-			<!-- wp:post-featured-image {"isLink":true,"width":"100%","height":"max(15vw, 30vh)","align":"wide"} /-->
-			<!-- wp:post-title {"isLink":true,"align":"wide"} /-->
-			<!-- wp:post-excerpt /-->
-			<!-- wp:post-date {"isLink":true} /-->
-
-			<!-- wp:spacer {"height":"var(--wp--preset--spacing--70)"} -->
-			<div style="height:var(--wp--preset--spacing--70)" aria-hidden="true" class="wp-block-spacer"></div>
-			<!-- /wp:spacer -->
-		<!-- /wp:post-template -->
-
-		<!-- wp:query-pagination {"paginationArrow":"arrow","align":"wide","layout":{"type":"flex","justifyContent":"space-between"}} -->
-			<!-- wp:query-pagination-previous /-->
-			<!-- wp:query-pagination-next /-->
-		<!-- /wp:query-pagination -->
-	</div>
-	<!-- /wp:query -->
-</main>
-<!-- /wp:group -->
-
-<!-- wp:template-part {"slug":"footer","tagName":"footer"} /-->
+<!-- wp:dragblock/wrapper {"className":"top","dragBlockStyles":[{"value":"{c=accent-contrast}","slug":"background-color"},{"slug":"row-gap","value":""},{"slug":"column-gap","value":""},{"slug":"margin-top","value":""}],"dragBlockCSS":"[data-dragblock-client-id=\u0022fb646c6a-f8cb-4c35-83fb-d9c0184b10ab\u0022]{background-color:{c=accent-contrast}}","dragBlockClientId":"fb646c6a-f8cb-4c35-83fb-d9c0184b10ab"} -->
+<div class="wp-block-dragblock-wrapper top"><!-- wp:dragblock/wrapper {"className":"meta","dragBlockStyles":[{"value":"5vw 0px 5vw 0px","slug":"padding"},{"value":"auto","slug":"margin"},{"value":"90vw","slug":"max-width"},{"value":"var(\u002d\u002dwp\u002d\u002dstyle\u002d\u002dglobal\u002d\u002dcontent-size)","slug":"width"},{"slug":"row-gap","value":""},{"slug":"column-gap","value":""},{"slug":"margin-top","value":""}],"dragBlockCSS":"[data-dragblock-client-id=\u0022931e323d-3e02-4c43-9470-7b78e02845cb\u0022]{width:var(\u002d\u002dwp\u002d\u002dstyle\u002d\u002dglobal\u002d\u002dcontent-size);max-width:90vw;margin:auto;padding:5vw 0px 5vw 0px}","dragBlockClientId":"931e323d-3e02-4c43-9470-7b78e02845cb"} -->
+	<div class="wp-block-dragblock-wrapper meta"><!-- wp:query-title {"type":"archive","align":"wide","style":{"spacing":{"margin":{"bottom":"var:preset|spacing|50"}}},"dragBlockStyles":[{"value":"1.5em","slug":"font-size","devices":"m"},{"value":"3em","slug":"font-size","devices":"t"},{"value":"4.00em","slug":"font-size"},{"slug":"margin-top","value":""}],"dragBlockCSS":"[data-dragblock-client-id=\u002299777bdd-f63b-4713-ba03-a17d24e2137c\u0022]{font-size:4.00em}@media screen and (min-width: 768px) and (max-width: 1024px) {[data-dragblock-client-id=\u002299777bdd-f63b-4713-ba03-a17d24e2137c\u0022]{font-size:3em}}@media screen and (max-width: 767px) {[data-dragblock-client-id=\u002299777bdd-f63b-4713-ba03-a17d24e2137c\u0022]{font-size:1.5em}}","dragBlockClientId":"99777bdd-f63b-4713-ba03-a17d24e2137c"} /-->
+	
+	<!-- wp:term-description {"dragBlockStyles":[{"slug":"margin-top","value":""}],"dragBlockClientId":"8a1dda33-d655-4016-a50b-a2da09b75a32"} /--></div>
+	<!-- /wp:dragblock/wrapper --></div>
+	<!-- /wp:dragblock/wrapper -->
+	
+	<!-- wp:dragblock/wrapper {"className":"main","dragBlockStyles":[{"slug":"row-gap","value":""},{"slug":"column-gap","value":""},{"slug":"margin-top","value":""}],"dragBlockClientId":"87f7b26c-6c7d-497c-9b8a-db6601b367bd"} -->
+	<div class="wp-block-dragblock-wrapper main"><!-- wp:dragblock/wrapper {"className":"posts","dragBlockStyles":[{"value":"5vw 0px 5vw 0px","slug":"padding"},{"value":"auto","slug":"margin"},{"value":"90vw","slug":"max-width"},{"value":"var(\u002d\u002dwp\u002d\u002dstyle\u002d\u002dglobal\u002d\u002dcontent-size)","slug":"width"},{"slug":"row-gap","value":""},{"slug":"column-gap","value":""},{"slug":"margin-top","value":""}],"dragBlockCSS":"[data-dragblock-client-id=\u0022912e6a15-7561-4913-9099-f7f12f572ca1\u0022]{width:var(\u002d\u002dwp\u002d\u002dstyle\u002d\u002dglobal\u002d\u002dcontent-size);max-width:90vw;margin:auto;padding:5vw 0px 5vw 0px}","dragBlockClientId":"912e6a15-7561-4913-9099-f7f12f572ca1","dragBlockQueries":[{"slug":"WP_Query_Default","name":"","id":"c72facf2-a7b9-4746-b586-33e9ac64d412__c72facf2-a7b9-4746-b586-33e9ac64d412","params":[]}]} -->
+	<div class="wp-block-dragblock-wrapper posts"><!-- wp:query {"queryId":0,"query":{"perPage":6,"pages":0,"offset":0,"postType":"post","order":"desc","orderBy":"date","author":"","search":"","exclude":[],"sticky":"","inherit":true},"displayLayout":{"type":"flex","columns":2},"align":"wide","layout":{"type":"default"},"dragBlockStyles":[{"slug":"margin-top","value":""}],"dragBlockClientId":"562e4f97-5336-4ed8-8c89-e39e7c9b955e"} -->
+	<div class="wp-block-query alignwide"><!-- wp:post-template {"align":"wide","dragBlockStyles":[{"value":"50px","slug":"row-gap","devices":"m"},{"value":"100px","slug":"row-gap"},{"value":"100%","slug":"width","selectors":"\u003eli.wp-block-post[class*=post]"}],"dragBlockCSS":"[data-dragblock-client-id=\u002220181405-9a45-4025-ad5b-8de0f883eadf\u0022] \u003eli.wp-block-post[class*=post]{width:100%}[data-dragblock-client-id=\u002220181405-9a45-4025-ad5b-8de0f883eadf\u0022]{row-gap:100px}@media screen and (max-width: 767px) {[data-dragblock-client-id=\u002220181405-9a45-4025-ad5b-8de0f883eadf\u0022]{row-gap:50px}}","dragBlockClientId":"20181405-9a45-4025-ad5b-8de0f883eadf"} -->
+	<!-- wp:dragblock/wrapper {"className":"post","dragBlockStyles":[{"slug":"grid-template-columns","value":"repeat(6,1fr)","devices":"m"},{"slug":"grid-template-columns","value":"repeat(6,1fr)","devices":"t"},{"slug":"grid-template-columns","value":"repeat(6,1fr)","devices":"d"},{"slug":"justify-content","value":"left"},{"slug":"align-items","value":"center"},{"slug":"display","value":"grid"},{"slug":"row-gap","value":""},{"slug":"column-gap","value":"30px"},{"slug":"margin-top","value":""}],"dragBlockCSS":"[data-dragblock-client-id=\u002261e66589-4a6b-4a52-af1a-73bba63759ca\u0022]{column-gap:30px;display:grid;align-items:center;justify-content:left}@media screen and (min-width: 1025px) {[data-dragblock-client-id=\u002261e66589-4a6b-4a52-af1a-73bba63759ca\u0022]{grid-template-columns:repeat(6,1fr)}}@media screen and (min-width: 768px) and (max-width: 1024px) {[data-dragblock-client-id=\u002261e66589-4a6b-4a52-af1a-73bba63759ca\u0022]{grid-template-columns:repeat(6,1fr)}}@media screen and (max-width: 767px) {[data-dragblock-client-id=\u002261e66589-4a6b-4a52-af1a-73bba63759ca\u0022]{grid-template-columns:repeat(6,1fr)}}","dragBlockClientId":"61e66589-4a6b-4a52-af1a-73bba63759ca","dragBlockQueries":[{"slug":"parse_item","name":"","id":"bc22c356-ee55-412a-9684-1b7371f6403c__bc22c356-ee55-412a-9684-1b7371f6403c","params":[]}]} -->
+	<div class="wp-block-dragblock-wrapper post"><!-- wp:dragblock/wrapper {"className":"thumb-wrap","dragBlockStyles":[{"slug":"grid-area","value":"1/1/2/7","devices":"m"},{"slug":"grid-area","value":"1/1/2/3","devices":"t"},{"slug":"grid-area","value":"1/1/2/3","devices":"d"},{"slug":"row-gap","value":""},{"slug":"column-gap","value":""},{"slug":"margin-top","value":""}],"dragBlockCSS":"@media screen and (min-width: 1025px) {[data-dragblock-client-id=\u00222b0dee04-93b5-4f8e-a921-3c2869bbfd14\u0022]{grid-area:1/1/2/3}}@media screen and (min-width: 768px) and (max-width: 1024px) {[data-dragblock-client-id=\u00222b0dee04-93b5-4f8e-a921-3c2869bbfd14\u0022]{grid-area:1/1/2/3}}@media screen and (max-width: 767px) {[data-dragblock-client-id=\u00222b0dee04-93b5-4f8e-a921-3c2869bbfd14\u0022]{grid-area:1/1/2/7}}","dragBlockClientId":"2b0dee04-93b5-4f8e-a921-3c2869bbfd14"} -->
+	<div class="wp-block-dragblock-wrapper thumb-wrap"><!-- wp:dragblock/link {"className":"thumb","dragBlockStyles":[{"value":"block","slug":"display"},{"value":"200px","slug":"height"},{"slug":"margin-top","value":""}],"dragBlockCSS":"[data-dragblock-client-id=\u002262a10633-8b80-494e-b6cc-6851b4a27be4\u0022]{height:200px;display:block}","dragBlockClientId":"62a10633-8b80-494e-b6cc-6851b4a27be4","dragBlockAttrs":[{"value":"[dragblock.post.url]","slug":"href"}]} -->
+	<a class="wp-block-dragblock-link thumb"><!-- wp:dragblock/image {"dragBlockStyles":[{"value":"20px","slug":"border-radius"},{"slug":"width","value":"100%"},{"slug":"height","value":"100%"},{"slug":"max-width","value":"100%"},{"slug":"margin-top","value":""}],"dragBlockCSS":"[data-dragblock-client-id=\u0022ff9794bc-8bab-4b24-8c96-81be04397334\u0022]{max-width:100%;height:100%;width:100%;border-radius:20px}","dragBlockClientId":"ff9794bc-8bab-4b24-8c96-81be04397334","dragBlockAttrs":[{"slug":"src","value":"[dragblock.post.image.src]"}]} -->
+	<img class="wp-block-dragblock-image"/>
+	<!-- /wp:dragblock/image --></a>
+	<!-- /wp:dragblock/link --></div>
+	<!-- /wp:dragblock/wrapper -->
+	
+	<!-- wp:dragblock/wrapper {"className":"content-wrap","dragBlockStyles":[{"slug":"grid-area","value":"2/1/3/7","devices":"m"},{"slug":"grid-area","value":"1/3/2/7","devices":"t"},{"slug":"grid-area","value":"1/3/2/7","devices":"d"},{"value":"column","slug":"flex-direction"},{"slug":"justify-content","value":"left"},{"slug":"display","value":"flex"},{"slug":"row-gap","value":"10px"},{"slug":"column-gap","value":""},{"slug":"margin-top","value":""}],"dragBlockCSS":"[data-dragblock-client-id=\u0022d5a19470-7745-4bd6-9b6d-832ffee7e693\u0022]{row-gap:10px;display:flex;justify-content:left;flex-direction:column}@media screen and (min-width: 1025px) {[data-dragblock-client-id=\u0022d5a19470-7745-4bd6-9b6d-832ffee7e693\u0022]{grid-area:1/3/2/7}}@media screen and (min-width: 768px) and (max-width: 1024px) {[data-dragblock-client-id=\u0022d5a19470-7745-4bd6-9b6d-832ffee7e693\u0022]{grid-area:1/3/2/7}}@media screen and (max-width: 767px) {[data-dragblock-client-id=\u0022d5a19470-7745-4bd6-9b6d-832ffee7e693\u0022]{grid-area:2/1/3/7}}","dragBlockClientId":"d5a19470-7745-4bd6-9b6d-832ffee7e693"} -->
+	<div class="wp-block-dragblock-wrapper content-wrap"><!-- wp:post-title {"isLink":true,"dragBlockStyles":[{"slug":"margin-top","value":"20px","devices":"m"},{"value":"0px","slug":"margin"}],"dragBlockCSS":"[data-dragblock-client-id=\u002296586cde-a5c1-4a3d-8f1c-50db577db0ee\u0022]{margin:0px}@media screen and (max-width: 767px) {[data-dragblock-client-id=\u002296586cde-a5c1-4a3d-8f1c-50db577db0ee\u0022]{margin-top:20px}}","dragBlockClientId":"96586cde-a5c1-4a3d-8f1c-50db577db0ee"} /-->
+	
+	<!-- wp:post-date {"isLink":true,"dragBlockStyles":[{"value":"60%","slug":"opacity"},{"slug":"margin-top","value":""}],"dragBlockCSS":"[data-dragblock-client-id=\u0022578c483f-9954-4767-ba9e-676c3a575ad8\u0022]{opacity:60%}","dragBlockClientId":"578c483f-9954-4767-ba9e-676c3a575ad8"} /-->
+	
+	<!-- wp:dragblock/text {"dragBlockText":[{"slug":"en_US","value":"[dragblock.post.snippet len=\u002230\u0022]"}],"dragBlockStyles":[{"slug":"margin-top","value":""}],"dragBlockClientId":"a7b3e712-deeb-47a9-bbe2-81c3c39a4067"} -->
+	<span class="wp-block-dragblock-text"></span>
+	<!-- /wp:dragblock/text --></div>
+	<!-- /wp:dragblock/wrapper --></div>
+	<!-- /wp:dragblock/wrapper -->
+	<!-- /wp:post-template -->
+	
+	<!-- wp:query-pagination {"paginationArrow":"arrow","layout":{"type":"flex","justifyContent":"space-between"},"dragBlockStyles":[{"value":"800","slug":"font-weight"},{"slug":"margin-top","value":"50px"}],"dragBlockCSS":"[data-dragblock-client-id=\u0022bb4e2d0b-a0b4-4562-a50b-292fa665f411\u0022]{margin-top:50px;font-weight:800}","dragBlockClientId":"bb4e2d0b-a0b4-4562-a50b-292fa665f411"} -->
+	<!-- wp:query-pagination-previous {"label":"Newer Posts","dragBlockClientId":"7538a733-8825-4c51-9ec9-4d8a81e6046b"} /-->
+	
+	<!-- wp:query-pagination-next {"label":"Older Posts","dragBlockClientId":"8b2fd96c-3a21-4b6c-8d88-677ff6a3c4e1"} /-->
+	<!-- /wp:query-pagination --></div>
+	<!-- /wp:query --></div>
+	<!-- /wp:dragblock/wrapper --></div>
+	<!-- /wp:dragblock/wrapper -->
+	
+	<!-- wp:template-part {"slug":"footer","theme":"epicmag","tagName":"footer","dragBlockClientId":"3a140db5-ed64-4c7b-b121-7b9a73db8361"} /-->
