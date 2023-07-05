@@ -9,7 +9,7 @@
 		"appearanceTools": true,		
 		"color": {
 			"custom": true,
-			"defaultPalette": true
+			"defaultPalette": false
 		}
 	},
 	"templateParts": [
