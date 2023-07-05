@@ -12,9 +12,29 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 EpicMag is a multiple-purpose theme for creating responsive magazine and newspaper WordPress theme effortlessly and rapidly. With thousand of pre-built theme sets, demos,  and styles, you can build or customize any websites from simple to complex one quickly and intuitively through the powerful site editor enhanced by DragBlock plugin. 
 
 
+== Demos ==
+= Default =
+
+
 == Changelog ==
 
 = 1.0 =
+Colors
+- primary: #FC5356
+- secondary: #E4474A
+- tertiary: #FFF0F0
+- base: #FAFAFA
+- contrast: #2D2D2D
+
+Layout
+- contentSize: 1000px
+- wideSize: 1420px
+
+Font
+- Main: Abril Fatface
+- Sub: Poppins
+				
+                	
 * Released: June 30, 2023
 
 == Copyright ==
