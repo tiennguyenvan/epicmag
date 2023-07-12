@@ -4,8 +4,8 @@
 	"settings": {		
 		"spacing": {
 			"blockGap": null,
-			"margin": false,
-			"padding": false
+			"margin": true,
+			"padding": true
 		},
 		"appearanceTools": true,		
 		"color": {

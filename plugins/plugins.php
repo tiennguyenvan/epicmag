@@ -1393,7 +1393,7 @@ if ( ! class_exists( 'TGM_Plugin_Activation' ) ) {
 			// Enrich the received data.
 			$plugin['file_path']   = $this->_get_plugin_basename_from_slug( $plugin['slug'] );
 			$plugin['source_type'] = $this->get_plugin_source_type( $plugin['source'] );
-
+			
 			// Set the class properties.
 			$this->plugins[ $plugin['slug'] ]    = $plugin;
 			$this->sort_order[ $plugin['slug'] ] = $plugin['name'];
@@ -2116,6 +2116,7 @@ if ( ! function_exists( 'tgmpa' ) ) {
 	 * @param array $config  Optional. An array of configuration values.
 	 */
 	function tgmpa( $plugins, $config = array() ) {
+		// var_dump($plugins); die();
 		$instance = call_user_func( array( get_class( $GLOBALS['tgmpa'] ), 'get_instance' ) );
 
 		foreach ( $plugins as $plugin ) {
@@ -3880,11 +3881,14 @@ function sneeit_register_required_plugins() {
 		$plugin = explode('_', $plugin);
 		$plugin_slug = $plugin[0];
 		$plugin_name = ucwords(str_replace('-', ' ', $plugin_slug));
-		
+		$source = get_template_directory() . '/plugins/'.$plugin_slug.'.zip';
 		if (!empty($plugin[1])) {
 			$plugin_version = $plugin[1];
-		} else {
-			$plugin_version = 'wp';
+		}
+		
+		if (!empty($plugin_version) && strpos($plugin_version, 'wp') !== false) {
+			$source = '';
+			$plugin_version = str_replace('wp', '', $plugin_version);
 		}
 		
 		$plugin = array(
@@ -3903,11 +3907,14 @@ function sneeit_register_required_plugins() {
 			$plugin['force_deactivation'] = true;
 			$plugin_version = str_replace('d', '', $plugin_version);
 		}
-		
-		if ($plugin_version && 'wp' != $plugin_version) {
-			$plugin['source'] = get_template_directory() . '/plugins/'.$plugin_slug.'.zip';
+
+		if ($source) {
+			$plugin['source'] = $source;
+		}
+		if ($plugin_version) {
 			$plugin['version'] = $plugin_version;
 		}
+		
 		
 		
 		array_push($plugins, $plugin);
@@ -3933,83 +3940,6 @@ function sneeit_register_required_plugins() {
 		'dismiss_msg'  => '',                      // If 'dismissable' is false, this message will be output at top of nag.
 		'is_automatic' => false,                   // Automatically activate plugins after installation or not.
 		'message'      => '',                      // Message to output right before the plugins table.
-
-		/*
-		'strings'      => array(
-			'page_title'                      => __( 'Install Required Plugins', 'sneeit' ),
-			'menu_title'                      => __( 'Install Plugins', 'sneeit' ),
-			/* translators: %s: plugin name. * /
-			'installing'                      => __( 'Installing Plugin: %s', 'sneeit' ),
-			/* translators: %s: plugin name. * /
-			'updating'                        => __( 'Updating Plugin: %s', 'sneeit' ),
-			'oops'                            => __( 'Something went wrong with the plugin API.', 'sneeit' ),
-			'notice_can_install_required'     => _n_noop(
-				/* translators: 1: plugin name(s). * /
-				'This theme requires the following plugin: %1$s.',
-				'This theme requires the following plugins: %1$s.',
-				'sneeit'
-			),
-			'notice_can_install_recommended'  => _n_noop(
-				/* translators: 1: plugin name(s). * /
-				'This theme recommends the following plugin: %1$s.',
-				'This theme recommends the following plugins: %1$s.',
-				'sneeit'
-			),
-			'notice_ask_to_update'            => _n_noop(
-				/* translators: 1: plugin name(s). * /
-				'The following plugin needs to be updated to its latest version to ensure maximum compatibility with this theme: %1$s.',
-				'The following plugins need to be updated to their latest version to ensure maximum compatibility with this theme: %1$s.',
-				'sneeit'
-			),
-			'notice_ask_to_update_maybe'      => _n_noop(
-				/* translators: 1: plugin name(s). * /
-				'There is an update available for: %1$s.',
-				'There are updates available for the following plugins: %1$s.',
-				'sneeit'
-			),
-			'notice_can_activate_required'    => _n_noop(
-				/* translators: 1: plugin name(s). * /
-				'The following required plugin is currently inactive: %1$s.',
-				'The following required plugins are currently inactive: %1$s.',
-				'sneeit'
-			),
-			'notice_can_activate_recommended' => _n_noop(
-				/* translators: 1: plugin name(s). * /
-				'The following recommended plugin is currently inactive: %1$s.',
-				'The following recommended plugins are currently inactive: %1$s.',
-				'sneeit'
-			),
-			'install_link'                    => _n_noop(
-				'Begin installing plugin',
-				'Begin installing plugins',
-				'sneeit'
-			),
-			'update_link' 					  => _n_noop(
-				'Begin updating plugin',
-				'Begin updating plugins',
-				'sneeit'
-			),
-			'activate_link'                   => _n_noop(
-				'Begin activating plugin',
-				'Begin activating plugins',
-				'sneeit'
-			),
-			'return'                          => __( 'Return to Required Plugins Installer', 'sneeit' ),
-			'plugin_activated'                => __( 'Plugin activated successfully.', 'sneeit' ),
-			'activated_successfully'          => __( 'The following plugin was activated successfully:', 'sneeit' ),
-			/* translators: 1: plugin name. * /
-			'plugin_already_active'           => __( 'No action taken. Plugin %1$s was already active.', 'sneeit' ),
-			/* translators: 1: plugin name. * /
-			'plugin_needs_higher_version'     => __( 'Plugin not activated. A higher version of %s is needed for this theme. Please update the plugin.', 'sneeit' ),
-			/* translators: 1: dashboard link. * /
-			'complete'                        => __( 'All plugins installed and activated successfully. %1$s', 'sneeit' ),
-			'dismiss'                         => __( 'Dismiss this notice', 'sneeit' ),
-			'notice_cannot_install_activate'  => __( 'There are one or more required or recommended plugins to install, update or activate.', 'sneeit' ),
-			'contact_admin'                   => __( 'Please contact the administrator of this site for help.', 'sneeit' ),
-
-			'nag_type'                        => '', // Determines admin notice type - can only be one of the typical WP notice classes, such as 'updated', 'update-nag', 'notice-warning', 'notice-info' or 'error'. Some of which may not work as expected in older WP versions.
-		),
-		*/
 	);
 	tgmpa( $plugins, $config );
 }
