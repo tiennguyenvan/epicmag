@@ -4,10 +4,10 @@
 	"settings": {		
 		"spacing": {
 			"blockGap": null,
-			"margin": true,
-			"padding": true
+			"margin": false,
+			"padding": false
 		},
-		"appearanceTools": true,		
+		"appearanceTools": true,
 		"color": {
 			"custom": true,
 			"defaultPalette": false
