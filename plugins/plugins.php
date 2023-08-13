@@ -9,7 +9,7 @@ if (!class_exists('EpicMag_Plugin_Installer')) {
 		Don't change this slug
 		It should match the slug of sneeit-core plugin
 		 */
-		public $admin_slug = 'sneeit-core';
+		public $admin_slug = 'sneeit-core-import';
 
 		/**
 		Don't change this slug
@@ -58,7 +58,7 @@ if (!class_exists('EpicMag_Plugin_Installer')) {
 				// Add the main menu page								
 				add_menu_page(
 					null, // page title
-					__('Sneeit Core', 'sneeit'), // menu title
+					__('Sneeit Core', 'epicmag'), // menu title
 					'manage_options', // capabilities
 					$this->admin_slug, // menu slug
 					null, // render function

@@ -16,9 +16,6 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 define('EPICMAG_REQUIRED_PLUGINS', array(    
     'dragblock' => '0.0.1',
     'sneeit-core' => '1.0',
-    'anchor-block' => '0.1',    
-    // 'sneeit-framework' => '8.3',
-    'test' => '0.0.1',
 ));
 if (is_admin()) {
 	require_once 'plugins/plugins.php';
