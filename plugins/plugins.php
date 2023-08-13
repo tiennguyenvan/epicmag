@@ -9,7 +9,10 @@ if (!class_exists('EpicMag_Plugin_Installer')) {
 		Don't change this slug
 		It should match the slug of sneeit-core plugin
 		 */
-		public $admin_slug = 'sneeit-core-import';
+		public $admin_slug = 'sneeit-core-welcome';
+		public $admin_redirect = '';
+		public $admin_redirect_activate = 'sneeit-core-activate';
+		public $admin_redirect_import = 'sneeit-core-import';
 
 		/**
 		Don't change this slug
@@ -36,6 +39,16 @@ if (!class_exists('EpicMag_Plugin_Installer')) {
 			// @todo: compare the versions and provide updates
 			if (count($this->remain) === 0) {
 				return;
+			}
+
+			// did not install sneeit core
+			if (!empty($this->remain['sneeit-core'])) {
+				// redirect to activate page after installation
+				$this->admin_redirect = $this->admin_redirect_activate;
+			} 
+			// otherwise, redirect to demo page after installation
+			else {
+				$this->admin_redirect = $this->admin_redirect_import;
 			}
 
 			// otherwise, create install page
@@ -164,7 +177,7 @@ if (!class_exists('EpicMag_Plugin_Installer')) {
 			wp_enqueue_script($this->sub_slug, $theme_url . $build_dir . $this->sub_slug . '/index.js', $asset_file['dependencies'], time(), true);
 			wp_localize_script($this->sub_slug, 'sneeitCoreRequiredPlugins', array(
 				'ajaxUrl' => admin_url('admin-ajax.php'),
-				'sneeitCoreUrl' => menu_page_url($this->admin_slug, false),
+				'sneeitCoreUrl' => menu_page_url($this->admin_redirect, false),
 				'nonce'   => wp_create_nonce($this->sub_slug),
 				'screenshot' => get_template_directory_uri() . '/screenshot.png',
 				'text' => array(
