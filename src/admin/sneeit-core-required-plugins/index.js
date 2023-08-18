@@ -1,4 +1,5 @@
-import { render, useState } from '@wordpress/element';
+import { createRoot, render, useState } from '@wordpress/element';
+
 import './style.scss';
 import { __ } from '@wordpress/i18n';
 import { Path, SVG } from '@wordpress/primitives';
@@ -27,6 +28,7 @@ function App() {
 
     const { screenshot, text, plugins, ajaxUrl, nonce, sneeitCoreUrl } = sneeitCoreRequiredPlugins;
 
+
     for (let plug in plugins) {
         plugins[plug] = 'init';
     }
@@ -40,7 +42,7 @@ function App() {
         }, 2000);
     }
     return (
-        <div class='content'>
+        <div className='content'>
 
             <div className='screenshot'>
                 <img src={screenshot} />
@@ -51,13 +53,13 @@ function App() {
                     <h1>{text.title}</h1>
                     {!error && (
 
-                        Object.keys(plugins).map((slug) => {
+                        Object.keys(plugins).map((slug, __i) => {
                             return (
-                                <>
-                                    <div className={'item ' + items[slug] + ' ' + (stage == 'installing' && items[slug] === 'init' && 'waiting')}>
-                                        {items[slug] === 'installed' ? iconCheck : icon3Dots} {slug.replaceAll('-', ' ')}
-                                    </div>
-                                </>
+
+                                <div className={'item ' + items[slug] + ' ' + (stage == 'installing' && items[slug] === 'init' && 'waiting')} key={__i}>
+                                    {items[slug] === 'installed' ? iconCheck : icon3Dots} {slug.replaceAll('-', ' ')}
+                                </div>
+
                             )
                         })
 
@@ -129,13 +131,13 @@ function App() {
                                     error = 'Invalid JSON: ' + err + ': ' + data;
                                     return;
                                 }
-                
+
                                 // error
                                 if (data['error']) {
                                     error = data['error'];
                                     return;
                                 }
-                                
+
                                 // otherwise, check as installed
                                 plugins[queue[0]] = 'installed';
                                 setItems(cloneDeep(plugins));
@@ -147,7 +149,7 @@ function App() {
 
 
                     }}>
-                        
+
                         {stage !== 'installed' ? text.button : text.redirecting}
                     </button>
                 </div>
@@ -173,7 +175,14 @@ function renderAppPage(app) {
     window.addEventListener(
         'load',
         function () {
-            render(app, pageEl)
+            // If version is less than 18 use `render` to render the app
+            // otherwise use `createRoot` to render the app
+            if (createRoot === undefined) {
+                render(app, pageEl);
+            } else {
+                const root = createRoot(pageEl);
+                root.render(app);
+            }
         },
         false
     );
