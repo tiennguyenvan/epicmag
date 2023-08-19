@@ -45,12 +45,12 @@ if (!class_exists('EpicMag_Plugin_Installer')) {
 			if (!empty($this->remain['sneeit-core'])) {
 				// redirect to activate page after installation
 				$this->admin_redirect = $this->admin_redirect_activate;
-			} 
+			}
 			// otherwise, redirect to demo page after installation
 			else {
 				$this->admin_redirect = $this->admin_redirect_import;
 			}
-		
+
 
 			// otherwise, create install page
 			add_action('admin_menu', array($this, 'admin_menu'));
@@ -68,20 +68,22 @@ if (!class_exists('EpicMag_Plugin_Installer')) {
 		public function admin_menu()
 		{
 
-			
+
 			// register admin menu if did not
 			if (empty($GLOBALS['admin_page_hooks'][$this->admin_slug])) {
 				// Add the main menu page								
 				add_menu_page(
-					null, // page title
+					__('Sneeit Core', 'epicmag'), // page title
 					__('Sneeit Core', 'epicmag'), // menu title
 					'manage_options', // capabilities
 					$this->admin_slug, // menu slug
-					null, // render function
+					array($this, 'add_submenu_page'), // render function
 					get_template_directory_uri() . '/assets/images/sneeit-logo-16.png', // icon
 					6 // position
 				);
 			}
+
+
 
 			global $menu;
 
@@ -100,7 +102,7 @@ if (!class_exists('EpicMag_Plugin_Installer')) {
 
 			add_submenu_page(
 				$this->admin_slug, // parent slug
-				null, // page title 
+				$this->admin_slug, // page title 
 				$this->theme_name . ' ' . __('Plugins', 'epicmag') . ' <span class="awaiting-mod">' . count($this->remain) . '</span>', // menu title
 				'manage_options', // capabilities
 				$this->sub_slug, // menu slug,
@@ -120,15 +122,19 @@ if (!class_exists('EpicMag_Plugin_Installer')) {
 		}
 
 		/**
-		 * 
+		 * Show required plugins
 		 */
 		public function admin_notices()
 		{
-			// only notice out of our own app
-			$page = $_GET['page'];
-			if ($page === $this->sub_slug) {
-				return;
+			if (!empty($_GET['page'])) {
+				$page = $_GET['page'];
+				// don't need to notice in our own app
+				if ($page === $this->sub_slug) {
+					return;
+				}
 			}
+
+
 			$keys = array_keys($this->remain);
 			$capitalized_keys = array_map('ucfirst', $keys);
 			$imploded_keys = implode(', ', $capitalized_keys);
@@ -140,7 +146,7 @@ if (!class_exists('EpicMag_Plugin_Installer')) {
 			echo sprintf(__('%s requires following plugins to work: <strong>%s</strong>', 'epicmag'), $this->theme_name, $imploded_keys);
 			echo '</p>';
 			echo '<p>';
-			echo '<a class="button button-large button-primary" href="'.menu_page_url($this->sub_slug, false).'">';
+			echo '<a class="button button-large button-primary" href="' . menu_page_url($this->sub_slug, false) . '">';
 			echo __('Please Install and Active', 'epicmag');
 			echo '</a>';
 			echo '</p>';
@@ -153,6 +159,9 @@ if (!class_exists('EpicMag_Plugin_Installer')) {
 		 */
 		public function admin_enqueue_scripts()
 		{
+			if (empty($_GET['page'])) {
+				return;
+			}
 			// only enqueue for our own app
 			$page = $_GET['page'];
 			if ($page !== $this->sub_slug) {
