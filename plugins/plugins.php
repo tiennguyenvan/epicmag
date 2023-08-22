@@ -26,6 +26,7 @@ if (!class_exists('EpicMag_Plugin_Installer')) {
 		 */
 		public function __construct()
 		{
+			add_filter('sneeit_core_activation_required', function(){return true;});
 
 			// check if there are plugins needed to be installed
 			$active_plugins = get_option('active_plugins');
@@ -35,6 +36,8 @@ if (!class_exists('EpicMag_Plugin_Installer')) {
 				unset($this->remain[$slug]);
 			}
 
+			
+
 			// all required plugins have been installed
 			// @todo: compare the versions and provide updates
 			if (count($this->remain) === 0) {
@@ -42,20 +45,22 @@ if (!class_exists('EpicMag_Plugin_Installer')) {
 			}
 
 			// did not install sneeit core
-			if (!empty($this->remain['sneeit-core'])) {
-				// redirect to activate page after installation
-				$this->admin_redirect = $this->admin_redirect_activate;
-			}
-			// otherwise, redirect to demo page after installation
-			else {
-				$this->admin_redirect = $this->admin_redirect_import;
-			}
+			// if (!empty($this->remain['sneeit-core'])) {
+			// 	// redirect to activate page after installation
+			// 	$this->admin_redirect = $this->admin_redirect_activate;
+			// }
+			// // otherwise, redirect to demo page after installation
+			// else {
+			// 	$this->admin_redirect = $this->admin_redirect_import;
+			// }
 
 
 			// otherwise, create install page
 			add_action('admin_menu', array($this, 'admin_menu'));
 			add_action('admin_enqueue_scripts', array($this, 'admin_enqueue_scripts'));
 			add_action('admin_notices', array($this, 'admin_notices'), 1);
+			
+			
 
 			$this->ajax_slug = str_replace('-', '_', $this->sub_slug);
 			add_action('wp_ajax_nopriv_' . $this->sub_slug, array($this, 'installer'));
