@@ -9,7 +9,7 @@ if (!class_exists('EpicMag_Plugin_Installer')) {
 		Don't change this slug
 		It should match the slug of sneeit-core plugin
 		 */
-		public $admin_slug = 'sneeit-core-welcome';
+		public $admin_slug = 'sneeit-core';
 		public $admin_redirect = 'sneeit-core-activate';
 		public $admin_redirect_activate = 'sneeit-core-activate';
 		public $admin_redirect_import = 'sneeit-core-import';
@@ -67,8 +67,6 @@ if (!class_exists('EpicMag_Plugin_Installer')) {
 		 */
 		public function admin_menu()
 		{
-
-
 			// register admin menu if did not
 			if (empty($GLOBALS['admin_page_hooks'][$this->admin_slug])) {
 				// Add the main menu page								
@@ -98,7 +96,6 @@ if (!class_exists('EpicMag_Plugin_Installer')) {
 			// register sub menu for the plugin install page						
 			$current_theme = wp_get_theme();
 			$this->theme_name = $current_theme->get('Name');
-
 
 			add_submenu_page(
 				$this->admin_slug, // parent slug
