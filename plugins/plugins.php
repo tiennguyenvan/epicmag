@@ -5,6 +5,7 @@ if (!class_exists('EpicMag_Plugin_Installer')) {
 	class EpicMag_Plugin_Installer
 	{
 		public $remain = EPICMAG_REQUIRED_PLUGINS;
+		
 		/**
 		Don't change this slug
 		It should match the slug of sneeit-core plugin
@@ -26,8 +27,6 @@ if (!class_exists('EpicMag_Plugin_Installer')) {
 		 */
 		public function __construct()
 		{
-			add_filter('sneeit_core_activation_required', function(){return true;});
-
 			// check if there are plugins needed to be installed
 			$active_plugins = get_option('active_plugins');
 
