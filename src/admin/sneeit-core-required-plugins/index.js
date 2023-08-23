@@ -36,8 +36,8 @@ function App() {
     const [items, setItems] = useState(cloneDeep(plugins));
     const [stage, setStage] = useState('init');
     const [error, setError] = useState('');
-    if (stage === 'installed') {
-        setTimeout(() => {
+    if (stage === 'installed' && sneeitCoreUrl) {
+        setTimeout(() => {            
             location.href = sneeitCoreUrl;
         }, 2000);
     }
@@ -150,7 +150,7 @@ function App() {
 
                     }}>
 
-                        {stage !== 'installed' ? text.button : text.redirecting}
+                        {stage !== 'installed' ? text.button : (sneeitCoreUrl ? text.redirecting : text.finished)}
                     </button>
                 </div>
 

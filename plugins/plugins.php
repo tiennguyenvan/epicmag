@@ -2,16 +2,17 @@
 if (!defined('ABSPATH')) exit;
 
 if (!class_exists('EpicMag_Plugin_Installer')) {
-	class EpicMag_Plugin_Installer
+if (!class_exists('Sneeit_Required_Plugin_Installer')) {
+	class Sneeit_Required_Plugin_Installer
 	{
 		public $remain = EPICMAG_REQUIRED_PLUGINS;
-		
+
 		/**
 		Don't change this slug
 		It should match the slug of sneeit-core plugin
 		 */
 		public $admin_slug = 'sneeit-core';
-		public $admin_redirect = 'sneeit-core-activate';
+		public $admin_redirect = 'sneeit-core-import';
 		public $admin_redirect_activate = 'sneeit-core-activate';
 		public $admin_redirect_import = 'sneeit-core-import';
 
@@ -35,7 +36,7 @@ if (!class_exists('EpicMag_Plugin_Installer')) {
 				unset($this->remain[$slug]);
 			}
 
-			
+
 
 			// all required plugins have been installed
 			// @todo: compare the versions and provide updates
@@ -44,22 +45,23 @@ if (!class_exists('EpicMag_Plugin_Installer')) {
 			}
 
 			// did not install sneeit core
-			// if (!empty($this->remain['sneeit-core'])) {
-			// 	// redirect to activate page after installation
-			// 	$this->admin_redirect = $this->admin_redirect_activate;
-			// }
-			// // otherwise, redirect to demo page after installation
-			// else {
-			// 	$this->admin_redirect = $this->admin_redirect_import;
-			// }
-
+			$theme = wp_get_theme();
+			$theme_update_uri = $theme->get('UpdateURI');
+			// prioritizing free for themes without update URI or themes with sneeit.com/free
+			// then themes with update URI different than sneeit.com
+			$requires_sneeit_license = (!(empty($theme_update_uri) || $theme_update_uri === 'https://sneeit.com/free')) && $theme_update_uri === 'https://sneeit.com/';
+			if ($requires_sneeit_license) {
+				$this->admin_redirect = $this->admin_redirect_activate;
+			} else {
+				$this->admin_redirect = $this->admin_redirect_import;
+			}
 
 			// otherwise, create install page
 			add_action('admin_menu', array($this, 'admin_menu'));
 			add_action('admin_enqueue_scripts', array($this, 'admin_enqueue_scripts'));
 			add_action('admin_notices', array($this, 'admin_notices'), 1);
-			
-			
+
+
 
 			$this->ajax_slug = str_replace('-', '_', $this->sub_slug);
 			add_action('wp_ajax_nopriv_' . $this->sub_slug, array($this, 'installer'));
@@ -194,6 +196,7 @@ if (!class_exists('EpicMag_Plugin_Installer')) {
 				'nonce'   => wp_create_nonce($this->sub_slug),
 				'screenshot' => get_template_directory_uri() . '/screenshot.png',
 				'text' => array(
+					'finished' => __('Finished', 'epicmag'),
 					'title' => __('Required Plugins for ', 'epicmag') .  $this->theme_name,
 					'button' => __('Install and Activate', 'epicmag'),
 					'redirecting' => __('Redirecting ...', 'epicmag'),
@@ -353,9 +356,15 @@ if (!class_exists('EpicMag_Plugin_Installer')) {
 				$local,
 				$plugin_slug
 			);
+			// if local file is not available on WordPress, try from our own github repository
+			$this->download_unzip_activate_plugin(
+				"https://github.com/tiennguyenvan/{$plugin_slug}-release/raw/main/{$plugin_slug}.zip",
+				$local,
+				$plugin_slug
+			);
 			$this->ajax_finished_die('installed');
 		}
 	}
 }
 
-new EpicMag_Plugin_Installer();
+new Sneeit_Required_Plugin_Installer();
