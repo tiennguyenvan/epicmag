@@ -1,7 +1,6 @@
 <?php
 if (!defined('ABSPATH')) exit;
 
-if (!class_exists('EpicMag_Plugin_Installer')) {
 if (!class_exists('Sneeit_Required_Plugin_Installer')) {
 	class Sneeit_Required_Plugin_Installer
 	{
