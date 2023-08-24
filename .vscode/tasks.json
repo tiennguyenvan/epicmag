@@ -2,9 +2,18 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "label": "EpicMag - Start",
+            "label": "start",
             "type": "shell",
             "command": "npm run start",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
+            "label": "build",
+            "type": "shell",
+            "command": "npm run build",
             "group": {
                 "kind": "build",
                 "isDefault": true
