@@ -37,7 +37,7 @@ function App() {
     const [stage, setStage] = useState('init');
     const [error, setError] = useState('');
     if (stage === 'installed' && sneeitCoreUrl) {
-        setTimeout(() => {            
+        setTimeout(() => {
             location.href = sneeitCoreUrl;
         }, 2000);
     }
@@ -144,6 +144,9 @@ function App() {
 
                                 //remove the installed plugin from queue
                                 queue.shift();
+                            }).fail(function (xhr, status) {
+                                error = status;
+                                return;
                             });
                         })
 
