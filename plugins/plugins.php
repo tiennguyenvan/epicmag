@@ -1,6 +1,6 @@
 <?php
 if (!defined('ABSPATH')) exit;
-
+// delete_site_transient('update_plugins');
 if (!class_exists('Sneeit_Required_Plugin_Installer')) {
 	class Sneeit_Required_Plugin_Installer
 	{
@@ -59,12 +59,20 @@ if (!class_exists('Sneeit_Required_Plugin_Installer')) {
 			add_action('admin_menu', array($this, 'admin_menu'));
 			add_action('admin_enqueue_scripts', array($this, 'admin_enqueue_scripts'));
 			add_action('admin_notices', array($this, 'admin_notices'), 1);
+			add_action('switch_theme', array($this, 'switch_theme'), 1);
 
 
 
 			$this->ajax_slug = str_replace('-', '_', $this->sub_slug);
 			add_action('wp_ajax_nopriv_' . $this->sub_slug, array($this, 'installer'));
 			add_action('wp_ajax_' . $this->sub_slug, array($this, 'installer'));
+		}
+
+		public function switch_theme() {
+			delete_site_transient('update_themes');			
+			delete_transient('update_themes');
+			delete_site_transient('update_plugins');
+			delete_transient('update_plugins');
 		}
 
 		/**
@@ -265,7 +273,7 @@ if (!class_exists('Sneeit_Required_Plugin_Installer')) {
 		{
 			$plugin_file = $this->plugin_install_file($slug);
 			if (!$plugin_file) {
-				$this->ajax_error_die(sprintf(__('"%s" has invalid file', 'epicmag'), $slug));
+				return new WP_Error('epicmag-plugin-installer', sprintf(__('"%s" has invalid file', 'epicmag'), $slug));
 			}
 
 			// clear cache so they have to scan all plugin data again
@@ -276,8 +284,9 @@ if (!class_exists('Sneeit_Required_Plugin_Installer')) {
 
 			$active = activate_plugin($plugin_file);
 			if (is_wp_error($active)) {
-				$this->ajax_error_die(sprintf(__('Cannot active "%1$s": file %2$s %3$s', 'epicmag'), $slug, $plugin_file, $active->get_error_message()));
+				return new WP_Error('epicmag-plugin-installer', sprintf(__('Cannot active "%1$s": file %2$s %3$s', 'epicmag'), $slug, $plugin_file, $active->get_error_message()));
 			}
+			return true;
 		}
 
 		public function unzip_activate_plugin($path, $slug)
@@ -290,19 +299,19 @@ if (!class_exists('Sneeit_Required_Plugin_Installer')) {
 			WP_Filesystem();
 			$unzip = unzip_file($path, WP_PLUGIN_DIR);
 			if (is_wp_error($unzip)) {
-				$this->ajax_error_die(sprintf(__('Cannot unzip "%1$s": %2$s', 'epicmag'), $slug, $unzip->get_error_message()));
+				return new WP_Error('epicmag-plugin-installer', sprintf(__('Cannot unzip "%1$s": %2$s', 'epicmag'), $slug, $unzip->get_error_message()));
 			}
 			if (!is_dir(WP_PLUGIN_DIR . '/' . $slug)) {
-				$this->ajax_error_die(sprintf(__('"%s" has invalid slug', 'epicmag'), $slug));
+				return new WP_Error('epicmag-plugin-installer', sprintf(__('"%s" has invalid slug', 'epicmag'), $slug));
 			}
-			$this->activate_plugin($slug);
+			return $this->activate_plugin($slug);
 		}
 
 		public function download_unzip_activate_plugin($url, $path, $slug)
 		{
 			$download = download_url($url);
 			if (is_wp_error($download)) {
-				$this->ajax_error_die(sprintf(__('Cannot download "%1$s": %2$s', 'epicmag'), $slug, $download->get_error_message()));
+				return new WP_Error('epicmag-plugin-installer', sprintf(__('Cannot download "%1$s": %2$s', 'epicmag'), $url, $download->get_error_message()));
 			}
 			$dir = dirname($path);
 
@@ -311,17 +320,18 @@ if (!class_exists('Sneeit_Required_Plugin_Installer')) {
 				// if not, create the base folder
 				if (!mkdir($dir, 0777)) {
 					unlink($download);
-					$this->ajax_error_die(sprintf(__('Cannot create folder of %s', 'epicmag'), $slug));
+					return new WP_Error('epicmag-plugin-installer', sprintf(__('Cannot create folder of %s', 'epicmag'), $slug));
 				}
 			}
 
 			// if user want to import another demos
 			if (!rename($download, $path)) {
 				unlink($download);
-				$this->ajax_error_die(sprintf(__('Cannot upload %s', 'epicmag'), $slug));
+
+				return new WP_Error('epicmag-plugin-installer', sprintf(__('Cannot upload %s', 'epicmag'), $slug));
 			}
 
-			$this->unzip_activate_plugin($path, $slug);
+			return $this->unzip_activate_plugin($path, $slug);
 		}
 
 		public function installer()
@@ -340,27 +350,42 @@ if (!class_exists('Sneeit_Required_Plugin_Installer')) {
 				$this->ajax_finished_die('installed');
 			}
 
-			// plugin is not installed
-			// if there no url for downloading
-			// and if local file is available            
+			// try to get from the github first to have the latest version of the plugin	
 			$local = get_template_directory() . '/plugins/' . $plugin_slug . '.zip';
+			$github_install = $this->download_unzip_activate_plugin(
+				"https://github.com/tiennguyenvan/{$plugin_slug}-release/raw/main/{$plugin_slug}.zip",
+				$local,
+				$plugin_slug
+			);
+			
+			if (!is_wp_error($github_install)) {
+				$this->ajax_finished_die('installed');
+			} else {
+				$this->ajax_error_die(sprintf(__('Cannot install from github "%1$s": %2$s', 'epicmag'), $plugin_slug, $github_install->get_error_message()));
+			}
+			
+			
+
+			// plugin is not available on github or installed failed
+			// and if local file is available then try to use our local script first
+			
 			if (file_exists($local)) {
 				$this->unzip_activate_plugin($local, $plugin_slug);
 				$this->ajax_finished_die('installed');
 			}
 
-			// if local file is not available, try from wordpress repository
-			$this->download_unzip_activate_plugin(
-				'https://downloads.wordpress.org/plugin/' . $plugin_slug . '.zip',
+
+			// here, github file is not available and the local file is not exist
+			// try from wordpress repository
+			$wp_install = $this->download_unzip_activate_plugin(
+				"https://downloads.wordpress.org/plugin/{$plugin_slug}.zip",
 				$local,
 				$plugin_slug
 			);
-			// if local file is not available on WordPress, try from our own github repository
-			$this->download_unzip_activate_plugin(
-				"https://github.com/tiennguyenvan/{$plugin_slug}-release/raw/main/{$plugin_slug}.zip",
-				$local,
-				$plugin_slug
-			);
+			if (is_wp_error($wp_install)) {
+				$this->ajax_error_die(sprintf(__('Cannot install "%1$s": %2$s', 'epicmag'), $plugin_slug, $wp_install->get_error_message()));
+			}
+
 			$this->ajax_finished_die('installed');
 		}
 	}
