@@ -1,13 +1,14 @@
 {
-	"name": "dragblock",
+	"name": "epicmag",
 	"version": "1.4.0",
-	"description": "Effortlessly add SVG icons and graphics to the WordPress block editor.",
-	"author": "Nick Diego",
+	"description": "A theme of everything",
+	"author": "Van Tien Nguyen",
 	"license": "GPL-2.0-or-later",
 	"main": "build/index.js",
 	"scripts": {
-		"build": "wp-scripts build --webpack-copy-php && gulp updateStyleVersion",
-		"start": "wp-scripts start --webpack-copy-php && gulp updateStyleVersion",
+		"releaseDemos": "gulp releaseDemos",
+		"build": "wp-scripts build --webpack-copy-php && gulp build && gulp createReleaseZip",
+		"start": "wp-scripts start --webpack-copy-php && gulp start",
 		"format": "wp-scripts format",
 		"lint:css": "wp-scripts lint-style",
 		"lint:js": "wp-scripts lint-js",
@@ -29,12 +30,14 @@
 		"html-react-parser": "^3.0.12"
 	},
 	"devDependencies": {
-		"@wordpress/scripts": "^24.6.0",
-		"lodash": "^4.17.21",
+		"@wordpress/scripts": "^26.10.0",		
+		"lodash": "^4.17.21",		
 		"webpack-remove-empty-scripts": "^0.8.4",
 		"gulp": "^4.0.2",
+		"gulp-clean": "^0.4.0",
 		"gulp-rename": "^2.0.0",
-		"gulp-replace": "^1.1.4",		
+		"gulp-replace": "^1.1.4",
+		"gulp-zip": "^5.1.0",
 		"run-sequence": "^2.2.1"
 	}
 }
