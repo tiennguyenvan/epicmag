@@ -346,7 +346,10 @@ if (!class_exists('Sneeit_Required_Plugin_Installer')) {
 
 			// the plugin is already installed, so active it
 			if (is_dir(WP_PLUGIN_DIR . '/' . $plugin_slug)) {
-				$this->activate_plugin($plugin_slug);
+				$active = $this->activate_plugin($plugin_slug);
+				if (is_wp_error($active)) {
+					$this->ajax_error_die($active->get_error_message());
+				}
 				$this->ajax_finished_die('installed');
 			}
 
