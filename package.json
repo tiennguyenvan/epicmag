@@ -7,8 +7,8 @@
 	"main": "build/index.js",
 	"scripts": {
 		"releaseDemos": "gulp cleanDemos && gulp copyDemos",
-		"build": "wp-scripts build --webpack-copy-php && gulp updateVersion && gulp copyToRelease && gulp copyToDEV && gulp ziplRelease",
-		"start": "wp-scripts start --webpack-copy-php && gulp start",
+		"build": "wp-scripts build --webpack-copy-php && gulp updateVersion && gulp copyToRelease && gulp copyToDEV && gulp zipRelease",
+		"start": "wp-scripts start --webpack-copy-php",
 		"format": "wp-scripts format",
 		"lint:css": "wp-scripts lint-style",
 		"lint:js": "wp-scripts lint-js",
