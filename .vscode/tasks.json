@@ -18,6 +18,16 @@
                 "kind": "build",
                 "isDefault": true
             }
+        },
+        
+        {
+            "label": "releaseDemos",
+            "type": "shell",
+            "command": "npm run releaseDemos",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
         }
     ]
 }

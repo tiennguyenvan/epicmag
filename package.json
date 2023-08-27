@@ -6,8 +6,8 @@
 	"license": "GPL-2.0-or-later",
 	"main": "build/index.js",
 	"scripts": {
-		"releaseDemos": "gulp releaseDemos",
-		"build": "wp-scripts build --webpack-copy-php && gulp build && gulp createReleaseZip",
+		"releaseDemos": "gulp cleanDemos && gulp copyDemos",
+		"build": "wp-scripts build --webpack-copy-php && gulp updateVersion && gulp copyToRelease && gulp copyToDEV && gulp ziplRelease",
 		"start": "wp-scripts start --webpack-copy-php && gulp start",
 		"format": "wp-scripts format",
 		"lint:css": "wp-scripts lint-style",
