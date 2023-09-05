@@ -363,20 +363,17 @@ if (!class_exists('Sneeit_Required_Plugin_Installer')) {
 			
 			if (!is_wp_error($github_install)) {
 				$this->ajax_finished_die('installed');
-			} else {
-				$this->ajax_error_die(sprintf(__('Cannot install from github "%1$s": %2$s', 'epicmag'), $plugin_slug, $github_install->get_error_message()));
 			}
 			
-			
+			// else {
+			// 	$this->ajax_error_die(sprintf(__('Cannot install from github "%1$s": %2$s', 'epicmag'), $plugin_slug, $github_install->get_error_message()));
+			// }						
 
 			// plugin is not available on github or installed failed
-			// and if local file is available then try to use our local script first
-			
-			if (file_exists($local)) {
-				$this->unzip_activate_plugin($local, $plugin_slug);
+			// and if local file is available then try to use our local script first			
+			if (file_exists($local) && !is_wp_error($this->unzip_activate_plugin($local, $plugin_slug))) {
 				$this->ajax_finished_die('installed');
 			}
-
 
 			// here, github file is not available and the local file is not exist
 			// try from wordpress repository
