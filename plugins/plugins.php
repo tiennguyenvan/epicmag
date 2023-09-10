@@ -48,7 +48,7 @@ if (!class_exists('Sneeit_Required_Plugin_Installer')) {
 			$theme_update_uri = $theme->get('UpdateURI');
 			// prioritizing free for themes without update URI or themes with sneeit.com/free
 			// then themes with update URI different than sneeit.com
-			$requires_sneeit_license = (!(empty($theme_update_uri) || $theme_update_uri === 'https://sneeit.com/free')) && $theme_update_uri === 'https://sneeit.com/';
+			$requires_sneeit_license = (!(empty($theme_update_uri) ||  'https://sneeit.com/free' === $theme_update_uri)) && 'https://sneeit.com/' === $theme_update_uri;
 			if ($requires_sneeit_license) {
 				$this->admin_redirect = $this->admin_redirect_activate;
 			} else {
