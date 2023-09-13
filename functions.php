@@ -9,6 +9,7 @@ define('EPICMAG_REQUIRED_PLUGINS', array(
 ));
 
 if (is_admin()) {
-	require_once 'plugins/plugins.php';
+    // don't rename the 'sneeit-core-required-plugins' as it the page slug to enqueue folder name in apps
+	require_once 'build/applications/sneeit-core-required-plugins/server/index.php';
 }
 

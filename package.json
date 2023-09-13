@@ -6,8 +6,10 @@
 	"license": "GPL-2.0-or-later",
 	"main": "build/index.js",
 	"scripts": {
-		"releaseDemos": "gulp cleanDemos && gulp copyDemos",
-		"build": "wp-scripts build --webpack-copy-php && gulp updateVersion && gulp copyToRelease && gulp copyToDEV && gulp zipRelease && gulp zipDEV",
+		"test": "gulp test",
+		"fulltest": "gulp fulltest",
+		"build": "wp-scripts build --webpack-copy-php && gulp build",
+		"release": "wp-scripts build --webpack-copy-php && gulp release",
 		"start": "wp-scripts start --webpack-copy-php",
 		"format": "wp-scripts format",
 		"lint:css": "wp-scripts lint-style",

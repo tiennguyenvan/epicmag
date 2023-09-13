@@ -1,8 +1,7 @@
 <?php
-if (!defined('ABSPATH')) exit;
 // delete_site_transient('update_plugins');
-if (!class_exists('Sneeit_Required_Plugin_Installer')) {
-	class Sneeit_Required_Plugin_Installer
+if (!class_exists('Sneeit_Themes_Required_Plugin_Installer')) {
+	class Sneeit_Themes_Required_Plugin_Installer
 	{
 		public $remain = EPICMAG_REQUIRED_PLUGINS;
 
@@ -62,6 +61,8 @@ if (!class_exists('Sneeit_Required_Plugin_Installer')) {
 			add_action('switch_theme', array($this, 'refresh_update_checker'), 1);
 			add_action('activated_plugin', array($this, 'refresh_update_checker'), 1);
 			add_action('deactivated_plugin', array($this, 'refresh_update_checker'), 1);
+			// add_action('update_themes_sneeit.com', array($this, 'update_themes'), 10, 4);
+			// add_action('update_plugins_sneeit.com', array($this, 'update_plugins'), 10, 4);
 
 
 			$this->ajax_slug = str_replace('-', '_', $this->sub_slug);
@@ -69,8 +70,10 @@ if (!class_exists('Sneeit_Required_Plugin_Installer')) {
 			add_action('wp_ajax_' . $this->sub_slug, array($this, 'installer'));
 		}
 
-		public function refresh_update_checker() {
-			delete_site_transient('update_themes');			
+
+		public function refresh_update_checker()
+		{
+			delete_site_transient('update_themes');
 			delete_transient('update_themes');
 			delete_site_transient('update_plugins');
 			delete_transient('update_plugins');
@@ -95,8 +98,6 @@ if (!class_exists('Sneeit_Required_Plugin_Installer')) {
 				);
 			}
 
-
-
 			global $menu;
 
 			foreach ($menu as $key => $value) {
@@ -105,7 +106,6 @@ if (!class_exists('Sneeit_Required_Plugin_Installer')) {
 					break;
 				}
 			}
-
 
 			// register sub menu for the plugin install page						
 			$current_theme = wp_get_theme();
@@ -181,10 +181,10 @@ if (!class_exists('Sneeit_Required_Plugin_Installer')) {
 
 			// register sub menu for the plugin install page									
 			$theme_url = get_template_directory_uri();
-			$build_dir = '/build/admin/';
+			$build_dir = '/build/applications/';
 
 			// enqueue dependencies
-			$asset_path = get_template_directory() . $build_dir . $this->sub_slug . '/index.asset.php';
+			$asset_path = get_template_directory() . $build_dir . $this->sub_slug . '/client/index.asset.php';
 			if (!file_exists($asset_path)) {
 				return;
 			}
@@ -193,11 +193,11 @@ if (!class_exists('Sneeit_Required_Plugin_Installer')) {
 			$asset_file = include $asset_path;
 
 			// Enqueue STYLES			
-			wp_enqueue_style($this->sub_slug, $theme_url . $build_dir . $this->sub_slug . '/style-index.css', null, time());
+			wp_enqueue_style($this->sub_slug, $theme_url . $build_dir . $this->sub_slug . '/client/style-index.css', null, time());
 
 			// Enqueue SCRIPT		
 			array_push($asset_file['dependencies'], 'wp-i18n', 'jquery');
-			wp_enqueue_script($this->sub_slug, $theme_url . $build_dir . $this->sub_slug . '/index.js', $asset_file['dependencies'], time(), true);
+			wp_enqueue_script($this->sub_slug, $theme_url . $build_dir . $this->sub_slug . '/client/index.js', $asset_file['dependencies'], time(), true);
 			wp_localize_script($this->sub_slug, 'sneeitCoreRequiredPlugins', array(
 				'ajaxUrl' => admin_url('admin-ajax.php'),
 				'sneeitCoreUrl' => admin_url('admin.php?page=' . $this->admin_redirect),
@@ -361,11 +361,11 @@ if (!class_exists('Sneeit_Required_Plugin_Installer')) {
 				$local,
 				$plugin_slug
 			);
-			
+
 			if (!is_wp_error($github_install)) {
 				$this->ajax_finished_die('installed');
 			}
-			
+
 			// else {
 			// 	$this->ajax_error_die(sprintf(__('Cannot install from github "%1$s": %2$s', 'epicmag'), $plugin_slug, $github_install->get_error_message()));
 			// }						
@@ -392,4 +392,4 @@ if (!class_exists('Sneeit_Required_Plugin_Installer')) {
 	}
 }
 
-new Sneeit_Required_Plugin_Installer();
+new Sneeit_Themes_Required_Plugin_Installer();

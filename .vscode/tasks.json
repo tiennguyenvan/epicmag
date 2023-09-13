@@ -2,6 +2,24 @@
     "version": "2.0.0",
     "tasks": [
         {
+            "label": "test",
+            "type": "shell",
+            "command": "npm run test",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
+            "label": "fulltest",
+            "type": "shell",
+            "command": "npm run fulltest",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
             "label": "start",
             "type": "shell",
             "command": "npm run start",
@@ -21,9 +39,9 @@
         },
         
         {
-            "label": "releaseDemos",
+            "label": "release",
             "type": "shell",
-            "command": "npm run releaseDemos",
+            "command": "npm run release",
             "group": {
                 "kind": "build",
                 "isDefault": true
