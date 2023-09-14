@@ -4,6 +4,7 @@ if (!class_exists('Sneeit_Themes_Required_Plugin_Installer')) {
 	class Sneeit_Themes_Required_Plugin_Installer
 	{
 		public $remain = EPICMAG_REQUIRED_PLUGINS;
+		public $checker = 'sneeit_update_checker';
 
 		/**
 		Don't change this slug
@@ -13,7 +14,7 @@ if (!class_exists('Sneeit_Themes_Required_Plugin_Installer')) {
 		public $admin_redirect = 'sneeit-core-import';
 		public $admin_redirect_activate = 'sneeit-core-activate';
 		public $admin_redirect_import = 'sneeit-core-import';
-
+		
 		/**
 		Don't change this slug
 		It should match with the folder name in the build directory
@@ -58,9 +59,15 @@ if (!class_exists('Sneeit_Themes_Required_Plugin_Installer')) {
 			add_action('admin_menu', array($this, 'admin_menu'));
 			add_action('admin_enqueue_scripts', array($this, 'admin_enqueue_scripts'));
 			add_action('admin_notices', array($this, 'admin_notices'), 1);
-			add_action('switch_theme', array($this, 'refresh_update_checker'), 1);
-			add_action('activated_plugin', array($this, 'refresh_update_checker'), 1);
-			add_action('deactivated_plugin', array($this, 'refresh_update_checker'), 1);
+			add_action('switch_theme', array($this, 'refresh_plugin_update_checker'), 1);
+			add_action('activated_plugin', array($this, 'refresh_theme_update_checker'), 1);
+			add_action('deactivated_plugin', array($this, 'refresh_theme_update_checker'), 1);
+			add_action('deactivated_plugin', array($this, 'refresh_theme_update_checker'), 1);
+			add_action('admin_footer', array($this, 'refresh_update_checker'), 1);
+
+
+			// refresh checker regularly updates
+
 			// add_action('update_themes_sneeit.com', array($this, 'update_themes'), 10, 4);
 			// add_action('update_plugins_sneeit.com', array($this, 'update_plugins'), 10, 4);
 
@@ -71,13 +78,34 @@ if (!class_exists('Sneeit_Themes_Required_Plugin_Installer')) {
 		}
 
 
-		public function refresh_update_checker()
-		{
-			delete_site_transient('update_themes');
-			delete_transient('update_themes');
+		/**
+		 * When switch theme, delete plugin checker
+		 * when update plugin, delete theme checker
+		 * this is to prevent conflict when updating plugin or theme
+		 */
+		public function refresh_theme_update_checker()
+		{			
 			delete_site_transient('update_plugins');
 			delete_transient('update_plugins');
 		}
+		public function refresh_plugin_update_checker()
+		{			
+			delete_site_transient('update_plugins');
+			delete_transient('update_plugins');
+		}
+		public function refresh_update_checker()
+		{			
+			if (empty(get_transient($this->checker))) {
+				delete_site_transient('update_plugins');
+				delete_transient('update_plugins');
+				delete_site_transient('update_plugins');
+				delete_transient('update_plugins');
+				set_transient($this->checker, true, 60 * 60 * 24); // refresh every day
+			}
+			
+		}
+		
+
 
 		/**
 		 * 
