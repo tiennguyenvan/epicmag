@@ -154,11 +154,11 @@ if (!class_exists('Sneeit_Themes_Required_Plugin_Installer')) {
 			echo sprintf(__('Missing required plugins for %s theme', 'epicmag'), $this->theme_name);
 			echo '</h2>';
 			echo '<p>';
-			echo sprintf(__('%s requires following plugins to work: <strong>%s</strong>', 'epicmag'), $this->theme_name, $imploded_keys);
+			echo sprintf(__('%s requires following plugins to work: ', 'epicmag'), $this->theme_name) . '<strong>' . $imploded_keys . '</strong>';
 			echo '</p>';
 			echo '<p>';
 			echo '<a class="button button-large button-primary" href="' . menu_page_url($this->sub_slug, false) . '">';
-			echo __('Please Install and Active', 'epicmag');
+			echo __('Please Install and Activate', 'epicmag');
 			echo '</a>';
 			echo '</p>';
 			echo '</div></section>';
@@ -208,7 +208,8 @@ if (!class_exists('Sneeit_Themes_Required_Plugin_Installer')) {
 					'title' => __('Required Plugins for ', 'epicmag') .  $this->theme_name,
 					'button' => __('Install and Activate', 'epicmag'),
 					'redirecting' => __('Redirecting ...', 'epicmag'),
-					'error' => __('WordPress Server Error', 'epicmag')
+					'error' => __('WordPress Server Error', 'epicmag'),
+					'label' => __('Required Plugins', 'epicmag')
 				),
 				'plugins' => $this->remain
 			));

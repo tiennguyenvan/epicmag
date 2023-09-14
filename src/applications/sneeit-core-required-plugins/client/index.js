@@ -45,7 +45,9 @@ function App() {
         <div className='content'>
 
             <div className='screenshot'>
-                <img src={screenshot} />
+                <div className='img'><img src={screenshot} /></div>
+                <div><span>{text.label}</span></div>
+                
             </div>
             <div className='details'>
 
