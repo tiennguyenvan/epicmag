@@ -3,7 +3,7 @@
 if (!class_exists('Sneeit_Themes_Required_Plugin_Installer')) {
 	class Sneeit_Themes_Required_Plugin_Installer
 	{
-		public $remain = EPICMAG_REQUIRED_PLUGINS;
+		public $remain = array();
 		public $checker = 'sneeit_update_checker';
 
 		/**
@@ -14,7 +14,7 @@ if (!class_exists('Sneeit_Themes_Required_Plugin_Installer')) {
 		public $admin_redirect = 'sneeit-core-import';
 		public $admin_redirect_activate = 'sneeit-core-activate';
 		public $admin_redirect_import = 'sneeit-core-import';
-		
+
 		/**
 		Don't change this slug
 		It should match with the folder name in the build directory
@@ -27,6 +27,12 @@ if (!class_exists('Sneeit_Themes_Required_Plugin_Installer')) {
 		 */
 		public function __construct()
 		{
+			// parse required plugins
+			$items = explode(', ', EPICMAG_REQUIRED_PLUGINS);			
+			foreach ($items as $item) {
+				$this->remain[$item] = ''; // Create an entry in the associative array with an empty value
+			}
+
 			// check if there are plugins needed to be installed
 			$active_plugins = get_option('active_plugins');
 
@@ -84,17 +90,17 @@ if (!class_exists('Sneeit_Themes_Required_Plugin_Installer')) {
 		 * this is to prevent conflict when updating plugin or theme
 		 */
 		public function refresh_theme_update_checker()
-		{			
+		{
 			delete_site_transient('update_plugins');
 			delete_transient('update_plugins');
 		}
 		public function refresh_plugin_update_checker()
-		{			
+		{
 			delete_site_transient('update_plugins');
 			delete_transient('update_plugins');
 		}
 		public function refresh_update_checker()
-		{			
+		{
 			if (empty(get_transient($this->checker))) {
 				delete_site_transient('update_plugins');
 				delete_transient('update_plugins');
@@ -102,9 +108,8 @@ if (!class_exists('Sneeit_Themes_Required_Plugin_Installer')) {
 				delete_transient('update_plugins');
 				set_transient($this->checker, true, 60 * 60 * 24); // refresh every day
 			}
-			
 		}
-		
+
 
 
 		/**
