@@ -127,9 +127,9 @@ function App() {
                                 try {
                                     data = JSON.parse(data);
                                 } catch (err) {
-                                    if (data.length > 60) {
-                                        data = data.substring(0, 60) + '...';
-                                    }
+                                    // if (data.length > 60) {
+                                    //     data = data.substring(0, 60) + '...';
+                                    // }
                                     error = 'Invalid JSON: ' + err + ': ' + data;
                                     return;
                                 }

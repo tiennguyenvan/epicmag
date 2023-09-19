@@ -1,7 +1,7 @@
 <?php
 // delete_site_transient('update_plugins');
-if (!class_exists('Sneeit_Themes_Required_Plugin_Installer')) {
-	class Sneeit_Themes_Required_Plugin_Installer
+if (!class_exists('Sneeit_Themes_Required_Plugins')) {
+	class Sneeit_Themes_Required_Plugins
 	{
 		public $remain = array();
 		public $checker = 'sneeit_update_checker';
@@ -162,7 +162,7 @@ if (!class_exists('Sneeit_Themes_Required_Plugin_Installer')) {
 		 */
 		public function add_submenu_page()
 		{
-			echo '<div class="app ' . $this->sub_slug . '"></div>';
+			echo '<div class="app ' . esc_attr($this->sub_slug) . '"></div>';
 		}
 
 		/**
@@ -171,7 +171,7 @@ if (!class_exists('Sneeit_Themes_Required_Plugin_Installer')) {
 		public function admin_notices()
 		{
 			if (!empty($_GET['page'])) {
-				$page = $_GET['page'];
+				$page = sanitize_text_field(wp_unslash($_GET['page']));
 				// don't need to notice in our own app
 				if ($page === $this->sub_slug) {
 					return;
@@ -184,13 +184,13 @@ if (!class_exists('Sneeit_Themes_Required_Plugin_Installer')) {
 			$imploded_keys = implode(', ', $capitalized_keys);
 			echo '<section><div class="notice notice-large notice-warning is-dismissible">';
 			echo '<h2 class="notice-title">';
-			echo sprintf(__('Missing required plugins for %s theme', 'epicmag'), $this->theme_name);
+			echo sprintf(__('Missing required plugins for %s theme', 'epicmag'), esc_html($this->theme_name));
 			echo '</h2>';
 			echo '<p>';
-			echo sprintf(__('%s requires following plugins to work: ', 'epicmag'), $this->theme_name) . '<strong>' . $imploded_keys . '</strong>';
+			echo sprintf(__('%s requires following plugins to work: ', 'epicmag'), esc_html($this->theme_name)) . '<strong>' . esc_html($imploded_keys) . '</strong>';
 			echo '</p>';
 			echo '<p>';
-			echo '<a class="button button-large button-primary" href="' . menu_page_url($this->sub_slug, false) . '">';
+			echo '<a class="button button-large button-primary" href="' . esc_attr(menu_page_url(esc_attr($this->sub_slug), false)) . '">';
 			echo __('Please Install and Activate', 'epicmag');
 			echo '</a>';
 			echo '</p>';
@@ -207,7 +207,7 @@ if (!class_exists('Sneeit_Themes_Required_Plugin_Installer')) {
 				return;
 			}
 			// only enqueue for our own app
-			$page = $_GET['page'];
+			$page = sanitize_text_field(wp_unslash($_GET['page']));
 			if ($page !== $this->sub_slug) {
 				return;
 			}
@@ -265,7 +265,7 @@ if (!class_exists('Sneeit_Themes_Required_Plugin_Installer')) {
 			if (empty($_POST['nonce'])) {
 				$this->ajax_error_die(__('empty nonce', 'epicmag'));
 			}
-			if (!wp_verify_nonce($_POST['nonce'], $this->sub_slug)) {
+			if (!wp_verify_nonce(sanitize_key(wp_unslash($_POST['nonce'])), $this->sub_slug)) {
 				$this->ajax_error_die(__('Timeout! Please reload the page.', 'epicmag'));
 			}
 			if (is_string($fields)) {
@@ -276,7 +276,7 @@ if (!class_exists('Sneeit_Themes_Required_Plugin_Installer')) {
 				foreach ($fields as $field) {
 					$field = trim($field);
 					if (empty($_POST[$field])) {
-						$this->ajax_error_die(sprintf(__('Missing required field: %s', $field)));
+						$this->ajax_error_die(sprintf(__('Missing required field: %s', 'epicmag'), $field));
 					}
 				}
 			}
@@ -374,8 +374,9 @@ if (!class_exists('Sneeit_Themes_Required_Plugin_Installer')) {
 			$this->ajax_request_verify_die('plugin');
 			require_once ABSPATH . 'wp-admin/includes/plugin.php';
 
-			$plugin_slug = $_POST['plugin'];
-			if (empty($this->remain[$plugin_slug])) {
+			$plugin_slug = sanitize_text_field(wp_unslash($_POST['plugin']));
+			
+			if (!empty($this->remain[$plugin_slug])) {				
 				$this->ajax_finished_die('installed');
 			}
 
@@ -426,4 +427,4 @@ if (!class_exists('Sneeit_Themes_Required_Plugin_Installer')) {
 	}
 }
 
-new Sneeit_Themes_Required_Plugin_Installer();
+new Sneeit_Themes_Required_Plugins();
