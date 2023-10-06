@@ -275,7 +275,7 @@ if (!class_exists('Sneeit_Themes_Required_Plugins')) {
 			if (!empty($fields)) {
 				foreach ($fields as $field) {
 					$field = trim($field);
-					if (empty($_POST[$field])) {
+					if (!isset($_POST[$field])) {
 						$this->ajax_error_die(sprintf(__('Missing required field: %s', 'epicmag'), $field));
 					}
 				}
