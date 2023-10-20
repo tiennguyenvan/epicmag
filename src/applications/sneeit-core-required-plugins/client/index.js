@@ -1,6 +1,7 @@
-import { createRoot, render, useState } from '@wordpress/element';
-
 import './style.scss';
+import './editor.scss';
+
+import { createRoot, render, useState } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
 import { Path, SVG } from '@wordpress/primitives';
 import { cloneDeep } from 'lodash';
@@ -72,7 +73,7 @@ function App() {
                 </div>
 
                 <div className='action'>
-                    <button className={'button button-primary ' + (stage !== 'init' && 'disabled')} onClick={() => {
+                    <button className={'button button-primary button-warning ' + (stage !== 'init' && 'disabled')} onClick={() => {
                         if (stage !== 'init') {
                             return;
                         }

@@ -42,7 +42,6 @@ if (!class_exists('Sneeit_Themes_Required_Plugins')) {
 			}
 
 
-
 			// all required plugins have been installed
 			// @todo: compare the versions and provide updates
 			if (count($this->remain) === 0) {
@@ -69,7 +68,7 @@ if (!class_exists('Sneeit_Themes_Required_Plugins')) {
 			add_action('activated_plugin', array($this, 'refresh_theme_update_checker'), 1);
 			add_action('deactivated_plugin', array($this, 'refresh_theme_update_checker'), 1);
 			add_action('deactivated_plugin', array($this, 'refresh_theme_update_checker'), 1);
-			add_action('admin_footer', array($this, 'refresh_update_checker'), 1);
+			add_action('admin_footer', array($this, 'refresh_update_checker'), 1);			
 
 
 			// refresh checker regularly updates
@@ -190,10 +189,10 @@ if (!class_exists('Sneeit_Themes_Required_Plugins')) {
 			echo sprintf(__('%s requires following plugins to work: ', 'epicmag'), esc_html($this->theme_name)) . '<strong>' . esc_html($imploded_keys) . '</strong>';
 			echo '</p>';
 			echo '<p>';
-			echo '<a class="button button-large button-primary" href="' . esc_attr(menu_page_url(esc_attr($this->sub_slug), false)) . '">';
+			echo '<a class="button button-large button-warning" href="' . esc_attr(menu_page_url(esc_attr($this->sub_slug), false)) . '">';
 			echo __('Please Install Required Plugins', 'epicmag');
 			echo '</a>';
-			echo '</p>';
+			echo '</p>';			
 			echo '</div></section>';
 		}
 
@@ -203,18 +202,23 @@ if (!class_exists('Sneeit_Themes_Required_Plugins')) {
 		 */
 		public function admin_enqueue_scripts()
 		{
+			// register sub menu for the plugin install page									
+			$theme_url = get_template_directory_uri();
+			$build_dir = '/build/applications/';
+
+
 			if (empty($_GET['page'])) {
+				wp_enqueue_style($this->sub_slug, $theme_url . $build_dir . $this->sub_slug . '/client/index.css', null, time());
 				return;
 			}
 			// only enqueue for our own app
 			$page = sanitize_text_field(wp_unslash($_GET['page']));
 			if ($page !== $this->sub_slug) {
+				wp_enqueue_style($this->sub_slug, $theme_url . $build_dir . $this->sub_slug . '/client/index.css', null, time());
 				return;
 			}
 
-			// register sub menu for the plugin install page									
-			$theme_url = get_template_directory_uri();
-			$build_dir = '/build/applications/';
+			
 
 			// enqueue dependencies
 			$asset_path = get_template_directory() . $build_dir . $this->sub_slug . '/client/index.asset.php';
@@ -225,7 +229,7 @@ if (!class_exists('Sneeit_Themes_Required_Plugins')) {
 			// Automatically load imported dependencies and assets version.
 			$asset_file = include $asset_path;
 
-			// Enqueue STYLES			
+			// Enqueue STYLES						
 			wp_enqueue_style($this->sub_slug, $theme_url . $build_dir . $this->sub_slug . '/client/style-index.css', null, time());
 
 			// Enqueue SCRIPT		
@@ -235,7 +239,8 @@ if (!class_exists('Sneeit_Themes_Required_Plugins')) {
 				'ajaxUrl' => admin_url('admin-ajax.php'),
 				'sneeitCoreUrl' => admin_url('admin.php?page=' . $this->admin_redirect),
 				'nonce'   => wp_create_nonce($this->sub_slug),
-				'screenshot' => get_template_directory_uri() . '/screenshot.png',
+				// 'screenshot' => get_template_directory_uri() . '/screenshot.png',
+				'screenshot' => get_template_directory_uri() . '/assets/images/plugin-screenshot.png',
 				'text' => array(
 					'finished' => __('Finished', 'epicmag'),
 					'title' => __('Required Plugins for ', 'epicmag') .  $this->theme_name,

@@ -1,44 +1,63 @@
+@import './button.scss';
+
 .app {
 	.content {
 		background-color: white;
 		border-radius: 10px;
 		box-shadow: 1px 1px 10px #0002;
 		width: 1200px;
-		max-width: 80vw;
+		min-width: 70%;
+		max-width: 90%;
+		// height: 70vh;
 		margin: 10vh auto 0 auto;
 		position: relative;
 		overflow: hidden;
-		display: grid;
-		grid-template-columns: repeat(2, 1fr);
+		display: flex;
+		// grid-template-columns: repeat(2, 1fr);
+		justify-content: stretch;
+		align-items: stretch;
 
 		@media screen and (max-width: 768px) {
-			grid-template-columns: repeat(1, 1fr);
+			flex-wrap: wrap;
+			// grid-template-columns: repeat(1, 1fr);
 		}
 
 		.screenshot {
-			border-right: 1px solid #eee;			
-			height: min(700px, 70vw);
-			max-height: 60vh;
+			box-sizing: border-box;
+			border-right: 1px solid #eee;						
+			flex-basis: 100%;
+			// flex-grow: 0;
 			background-color: #000;
 			position: relative;
-			display: grid;
-			grid-template-columns: repeat(1, 1fr);
-			img {				
-				width: 100%;
-				height: 100%;
-				object-fit: cover;				
-				opacity: 0.3;				
+			height: 70vh;
+			// display: grid;
+			// grid-template-columns: repeat(1, 1fr);
+			@media screen and (max-width: 768px) {
+				height: 30vh;
 			}
+	
 			div {				
-				grid-column: 1;
-				grid-row: 1;
+				// grid-column: 1;
+				// grid-row: 1;
 				display: flex;
 				justify-content: center;
 				align-items: center;
-				position: relative;
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: 100%;
 				&.img {
 					background-color: #000;
 				}
+
+				img {				
+					width: 100%;
+					height: 100%;
+					object-fit: cover;				
+					opacity: 0.3;				
+				}
+
 				span {
 					font-size: min(6vw, 10vh);	
 					font-weight: 900;
@@ -51,6 +70,9 @@
 		}
 
 		.details {
+			box-sizing: border-box;
+			flex-basis: 100%;
+			// flex-grow: 0;
 			padding: 5vw;
 			display: flex;
 			flex-direction: column;
@@ -119,7 +141,6 @@
 
 	}
 }
-
 
 @keyframes spin {
 	0% {

@@ -1,0 +1,45 @@
+
+////////////////////////////////////////////////////////////////
+/// Warning
+/////////////////////////////////////////////////////////////////////
+$warningColor: #dba617;
+$warningColorHover: #edb111;
+$waringGlowShadow: 0 0 10px 2px;
+@keyframes glowWarning {
+    0% {
+        box-shadow: $waringGlowShadow #FFF0;
+    }
+
+    50% {
+        box-shadow: $waringGlowShadow $warningColor;
+    }
+
+    100% {
+        box-shadow: $waringGlowShadow #FFF0;
+    }
+}
+
+.wp-core-ui .button-warning {
+    background: $warningColor;
+    border-color: #0005;
+    animation: glowWarning 1.5s infinite;
+    color: white;
+}
+
+.wp-core-ui .button-warning:hover {
+    color: white;
+    background: $warningColorHover;
+    border-color: #0005;
+    box-shadow: 1px 1px 5px #0002;
+    // animation: none;
+}
+
+.wp-core-ui .button-warning:active,
+.wp-core-ui .button-warning:focus {
+    color: white;
+    background: $warningColor;
+    border-color: white;
+    outline: 2px solid $warningColor;
+    box-shadow: none;
+    animation: none;
+}
