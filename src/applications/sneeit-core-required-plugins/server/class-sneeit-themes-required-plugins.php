@@ -28,7 +28,7 @@ if (!class_exists('Sneeit_Themes_Required_Plugins')) {
 		public function __construct()
 		{
 			// parse required plugins
-			$items = explode(', ', EPICMAG_REQUIRED_PLUGINS);			
+			$items = explode(', ', EPICMAG_REQUIRED_PLUGINS);
 			foreach ($items as $item) {
 				$this->remain[$item] = ''; // Create an entry in the associative array with an empty value
 			}
@@ -68,7 +68,7 @@ if (!class_exists('Sneeit_Themes_Required_Plugins')) {
 			add_action('activated_plugin', array($this, 'refresh_theme_update_checker'), 1);
 			add_action('deactivated_plugin', array($this, 'refresh_theme_update_checker'), 1);
 			add_action('deactivated_plugin', array($this, 'refresh_theme_update_checker'), 1);
-			add_action('admin_footer', array($this, 'refresh_update_checker'), 1);			
+			add_action('admin_footer', array($this, 'refresh_update_checker'), 1);
 
 
 			// refresh checker regularly updates
@@ -192,7 +192,7 @@ if (!class_exists('Sneeit_Themes_Required_Plugins')) {
 			echo '<a class="button button-large button-warning" href="' . esc_attr(menu_page_url(esc_attr($this->sub_slug), false)) . '">';
 			echo __('Please Install Required Plugins', 'epicmag');
 			echo '</a>';
-			echo '</p>';			
+			echo '</p>';
 			echo '</div></section>';
 		}
 
@@ -218,7 +218,7 @@ if (!class_exists('Sneeit_Themes_Required_Plugins')) {
 				return;
 			}
 
-			
+
 
 			// enqueue dependencies
 			$asset_path = get_template_directory() . $build_dir . $this->sub_slug . '/client/index.asset.php';
@@ -380,16 +380,21 @@ if (!class_exists('Sneeit_Themes_Required_Plugins')) {
 			require_once ABSPATH . 'wp-admin/includes/plugin.php';
 
 			$plugin_slug = sanitize_text_field(wp_unslash($_POST['plugin']));
-			
-			if (!empty($this->remain[$plugin_slug])) {				
+
+			if (!empty($this->remain[$plugin_slug])) {
 				$this->ajax_finished_die('installed');
 			}
 
 			// the plugin is already installed, so active it
-			if (is_dir(WP_PLUGIN_DIR . '/' . $plugin_slug)) {
+			if (
+				is_dir(WP_PLUGIN_DIR . '/' . $plugin_slug) &&
+				// force download and instal if there was a failed update
+				$this->plugin_install_file($slug)
+			) {
+
 				$active = $this->activate_plugin($plugin_slug);
 				if (is_wp_error($active)) {
-					$this->ajax_error_die($active->get_error_message());
+					$this->ajax_error_die('error 1: ' . $active->get_error_message());
 				}
 				$this->ajax_finished_die('installed');
 			}
@@ -405,6 +410,9 @@ if (!class_exists('Sneeit_Themes_Required_Plugins')) {
 			if (!is_wp_error($github_install)) {
 				$this->ajax_finished_die('installed');
 			}
+			// $this->ajax_error_die($github_install->get_error_message());
+
+
 
 			// else {
 			// 	$this->ajax_error_die(sprintf(__('Cannot install from github "%1$s": %2$s', 'epicmag'), $plugin_slug, $github_install->get_error_message()));
