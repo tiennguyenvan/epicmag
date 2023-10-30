@@ -69,6 +69,9 @@ if (!class_exists('Sneeit_Themes_Required_Plugins')) {
 			add_action('deactivated_plugin', array($this, 'refresh_theme_update_checker'), 1);
 			add_action('deactivated_plugin', array($this, 'refresh_theme_update_checker'), 1);
 			add_action('admin_footer', array($this, 'refresh_update_checker'), 1);
+			add_action('after_setup_theme', array($this, 'load_languages'), 1);
+
+			
 
 
 			// refresh checker regularly updates
@@ -81,7 +84,12 @@ if (!class_exists('Sneeit_Themes_Required_Plugins')) {
 			add_action('wp_ajax_nopriv_' . $this->sub_slug, array($this, 'installer'));
 			add_action('wp_ajax_' . $this->sub_slug, array($this, 'installer'));
 		}
-
+		public function load_languages() {
+			
+			// Load the theme's text domain
+			load_theme_textdomain('epicmag', get_template_directory() . '/languages');
+		}
+		
 
 		/**
 		 * When switch theme, delete plugin checker
