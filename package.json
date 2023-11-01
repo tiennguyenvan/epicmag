@@ -6,6 +6,7 @@
 	"license": "GPL-2.0-or-later",
 	"main": "build/index.js",
 	"scripts": {
+		"translate": "gulp translate",
 		"test": "gulp test",
 		"fulltest": "gulp fulltest",
 		"build": "wp-scripts build --webpack-copy-php && gulp build",

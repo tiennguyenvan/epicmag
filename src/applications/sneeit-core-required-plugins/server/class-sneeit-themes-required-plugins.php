@@ -128,8 +128,8 @@ if (!class_exists('Sneeit_Themes_Required_Plugins')) {
 			if (empty($GLOBALS['admin_page_hooks'][$this->admin_slug])) {
 				// Add the main menu page								
 				add_menu_page(
-					__('Sneeit Core', 'epicmag'), // page title
-					__('Sneeit Core', 'epicmag'), // menu title
+					'Sneeit Core', // page title
+					'Sneeit Core', // menu title
 					'manage_options', // capabilities
 					$this->admin_slug, // menu slug
 					array($this, 'add_submenu_page'), // render function
@@ -154,7 +154,7 @@ if (!class_exists('Sneeit_Themes_Required_Plugins')) {
 			add_submenu_page(
 				$this->admin_slug, // parent slug
 				$this->admin_slug, // page title 
-				$this->theme_name . ' ' . __('Plugins', 'epicmag') . ' <span class="awaiting-mod">' . count($this->remain) . '</span>', // menu title
+				$this->theme_name . ' ' . 'Plugins' . ' <span class="awaiting-mod">' . count($this->remain) . '</span>', // menu title
 				'manage_options', // capabilities
 				$this->sub_slug, // menu slug,
 				array($this, 'add_submenu_page') // render function
