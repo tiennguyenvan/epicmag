@@ -34,7 +34,20 @@ if (!class_exists('Sneeit_Themes_Required_Plugins')) {
 			}
 
 			// check if there are plugins needed to be installed
-			$active_plugins = get_option('active_plugins');
+			// Get network-activated plugins
+			$network_activated_plugins = get_site_option('active_sitewide_plugins');
+
+			// Get site-specific activated plugins
+			$site_specific_plugins = get_option('active_plugins');
+
+			// Combine both lists
+			$active_plugins = array_merge(
+				is_array($network_activated_plugins) ? array_keys($network_activated_plugins) : [],
+				is_array($site_specific_plugins) ? $site_specific_plugins : []
+			);
+
+			// Now $all_activated_plugins contains a list of all activated plugins
+			// $active_plugins = get_option('active_plugins');
 
 			foreach ($active_plugins as $plugin) {
 				$slug = dirname($plugin);
@@ -71,7 +84,7 @@ if (!class_exists('Sneeit_Themes_Required_Plugins')) {
 			add_action('admin_footer', array($this, 'refresh_update_checker'), 1);
 			add_action('after_setup_theme', array($this, 'load_languages'), 1);
 
-			
+
 
 
 			// refresh checker regularly updates
@@ -84,12 +97,13 @@ if (!class_exists('Sneeit_Themes_Required_Plugins')) {
 			add_action('wp_ajax_nopriv_' . $this->sub_slug, array($this, 'installer'));
 			add_action('wp_ajax_' . $this->sub_slug, array($this, 'installer'));
 		}
-		public function load_languages() {
-			
+		public function load_languages()
+		{
+
 			// Load the theme's text domain
 			load_theme_textdomain('epicmag', get_template_directory() . '/languages');
 		}
-		
+
 
 		/**
 		 * When switch theme, delete plugin checker
