@@ -1,4 +1,6 @@
 <?php
+require_once ABSPATH . 'wp-admin/includes/plugin.php';
+
 // delete_site_transient('update_plugins');
 if (!class_exists('Sneeit_Themes_Required_Plugins')) {
 	class Sneeit_Themes_Required_Plugins
@@ -22,6 +24,11 @@ if (!class_exists('Sneeit_Themes_Required_Plugins')) {
 		public $sub_slug = 'sneeit-core-required-plugins';
 		public $ajax_slug = '';
 		public $theme_name = '';
+
+		private function normalize_plugin_slug($slug) {
+			//return strtolower(str_replace([' ', '-', '_'], '', $slug));
+			return strtolower(str_replace([' '], '-', trim($slug)));
+		}
 		/**
 		 * 
 		 */
@@ -30,29 +37,34 @@ if (!class_exists('Sneeit_Themes_Required_Plugins')) {
 			// parse required plugins
 			$items = explode(', ', EPICMAG_REQUIRED_PLUGINS);
 			foreach ($items as $item) {
-				$this->remain[$item] = ''; // Create an entry in the associative array with an empty value
+				$this->remain[$this->normalize_plugin_slug($item)] = ''; // Create an entry in the associative array with an empty value
 			}
 
-			// check if there are plugins needed to be installed
-			// Get network-activated plugins
-			$network_activated_plugins = get_site_option('active_sitewide_plugins');
+			// get all installed plugins with headers
+			$all_plugins = get_plugins();
 
-			// Get site-specific activated plugins
-			$site_specific_plugins = get_option('active_plugins');
+			// get active plugins (site + network)
+			$network_activated = get_site_option('active_sitewide_plugins') ?: [];
+			$site_activated    = get_option('active_plugins') ?: [];
+			$active_plugins    = array_merge(array_keys($network_activated), $site_activated);			
 
-			// Combine both lists
-			$active_plugins = array_merge(
-				is_array($network_activated_plugins) ? array_keys($network_activated_plugins) : [],
-				is_array($site_specific_plugins) ? $site_specific_plugins : []
-			);
+			foreach ($active_plugins as $plugin_file) {
+				if (isset($all_plugins[$plugin_file])) {
+					$plugin_data = $all_plugins[$plugin_file];					
 
-			// Now $all_activated_plugins contains a list of all activated plugins
-			// $active_plugins = get_option('active_plugins');
+					// check against folder slug
+					$slug = $this->normalize_plugin_slug(dirname($plugin_file));
 
-			foreach ($active_plugins as $plugin) {
-				$slug = dirname($plugin);
-				unset($this->remain[$slug]);
+					unset($this->remain[$slug]);
+
+					// check against text domain
+					if (!empty($plugin_data['TextDomain'])) {
+						$text_domain = $this->normalize_plugin_slug($plugin_data['TextDomain']);
+						unset($this->remain[$text_domain]);
+					}
+				}
 			}
+
 
 
 			// all required plugins have been installed
